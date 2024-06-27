@@ -29,5 +29,6 @@
   "bugs": {
     "url": "https://github.com/lukasoppermann/design-token-transformer/issues"
   },
-  "homepage": "https://github.com/lukasoppermann/design-token-transformer#readme"
+  "homepage": "https://github.com/lukasoppermann/design-token-transformer#readme",
+  "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72"
 }
