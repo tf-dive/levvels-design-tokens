@@ -64,13 +64,16 @@ jobs:
         run: git config --global init.defaultBranch develop
 
       - name: Checkout source repository
-        run: |
-          git clone https://github.com/tf-dive/starc-admin-fe.git
-          cd starc-admin-fe
-          git checkout develop
+        uses: actions/checkout@v3
+        with:
+          repository: tf-dive/starc-admin-fe
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: develop
 
       - name: Copy file to another repository
         run: |
+          git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/tf-dive/starc-admin-fe.git
+          cd starc-admin-fe
           cp ../tokens/${{ env.SERVICE_TYPE }}.json ./${{ env.SERVICE_TYPE }}.json
           git checkout -b feature/design-token-update-${{ env.TIMESTAMP }}
           git add .
