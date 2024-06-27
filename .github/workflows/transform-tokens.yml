@@ -40,13 +40,11 @@ jobs:
       - name: Transform design tokens 
         run: 'npm i && npm run transform-tokens'
       # We now create a pull request 
-      - name: Create PR 
-        uses: peter-evans/create-pull-request@v3
-        with:
-          commit-message: ${{ github.event.client_payload.commitMessage || 'Tokens updated' }}
-          title: "Design tokens updated"
-          body: "Design tokens have been updated via Figma and need to be reviewed."
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # this parameter is optional and defaults to master but I am using main
-          BRANCH_NAME: 'main'
+      - name: Create Commit
+        run:
+          git config --global user.name “github-actions[bot]”
+          git config --global user.email “github-actions[bot]@users.noreply.github.com”
+          git add ${{ github.event.client_payload.filename }}.json
+          git commit -m “${{ github.event.client_payload.commitMessage }}”
+          git push
+        
