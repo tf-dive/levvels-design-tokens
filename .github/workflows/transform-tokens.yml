@@ -82,13 +82,13 @@ jobs:
           git commit -m "Sync token json file from figma"
           git push origin feature/design-token-update-${{ env.TIMESTAMP }}
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.TARGET_REPO_ACCESS_TOKEN }}
-          commit-message: Sync file.txt from source repository
-          committer: GitHub <noreply@github.com>
-          author: GitHub <noreply@github.com>
-          title: Sync file.txt from source repository
-          body: This PR syncs file.txt from source repository
-          labels: auto-merge
+      # - name: Create Pull Request
+      #   uses: peter-evans/create-pull-request@v5
+      #   with:
+      #     token: ${{ secrets.TARGET_REPO_ACCESS_TOKEN }}
+      #     commit-message: Sync file.txt from source repository
+      #     committer: GitHub <noreply@github.com>
+      #     author: GitHub <noreply@github.com>
+      #     title: Sync file.txt from source repository
+      #     body: This PR syncs file.txt from source repository
+      #     labels: auto-merge
