@@ -67,8 +67,13 @@ jobs:
       - name: Checkout source repository
         uses: actions/checkout@v3
         with:
-          repository: tf-dive/starc-admin-fe
+          repository: your-username/source-repo
           token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GIT_INIT_DEFAULT_BRANCH: develop # 필요한 기본 브랜치 이름으로 변경
+
+      - name: Set init.defaultBranch
+        run: git config --global init.defaultBranch develop # 필요한 기본 브랜치 이름으로 변경
 
       - name: Copy file to another repository
         run: |
