@@ -4,7 +4,7 @@ name: Transform tokens send from figma
 on:
   repository_dispatch:
     # and the event_type property from the request body is 'update-tokens'
-    types: 
+    types:
       - starc
       - vuddy
 # the following defines the jon that is run if the above is true
@@ -25,12 +25,12 @@ jobs:
         run: |
           echo "SERVICE_TYPE=${{ github.event.action }}" >> $GITHUB_ENV
 
-      # this lets us work in the actual repository 
+      # this lets us work in the actual repository
       - uses: actions/checkout@master
       # if the folder named "tokens" does not exist, create it
       - name: mkdir "tokens" directory
-        # change tokens here (and in line 32) if you want to use a differently named folder 
-        run: 'mkdir -p tokens'
+        # change tokens here (and in line 32) if you want to use a differently named folder
+        run: "mkdir -p tokens"
       # this creates a json file from the stringified json from the request body
       - name: create json from request body
         id: create-json
@@ -41,7 +41,7 @@ jobs:
           # it uses the json string that was send as the tokens parameter
           json: ${{ github.event.client_payload.tokens }}
           # it uses the directory named "tokens" to store this json file (change this if you changed it above to use a different folder)
-          dir: 'tokens'
+          dir: "tokens"
       # we now initialize node to run amazon style dictionary to compile the tokens
       - name: Use Node.js 14.x
         uses: actions/setup-node@v1
@@ -49,9 +49,9 @@ jobs:
           # we use version 14.x of node
           node-version: 14.x
       # We now run npm i to install all dependencies and run the "transfrom" script that is defined in the package.json (change this if you need to)
-      - name: Transform design tokens 
-        run: 'npm i && SERVICE_TYPE=${{ env.SERVICE_TYPE }} npm run transform-tokens'
-      # We now create a pull request 
+      - name: Transform design tokens
+        run: "npm i && SERVICE_TYPE=${{ env.SERVICE_TYPE }} npm run transform-tokens"
+      # We now create a pull request
       - name: Create Commit
         run: |
           git config --global user.name "github-actions[bot]"
@@ -59,4 +59,36 @@ jobs:
           git add .
           git commit -m "${{ env.SERVICE_TYPE }} Design tokens updated at ${{ env.TIMESTAMP }}"
           git push
-        
+
+  sync-token-file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v3
+        with:
+          repository: tf-dive/starc-admin-fe
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Copy file to another repository
+        run: |
+          git clone https://x-access-token:${{ secrets.TARGET_REPO_ACCESS_TOKEN }}@github.com/tf-dive/starc-admin-fe.git
+          cp tokens/${{ env.SERVICE_TYPE }}.json starc-admin-fe/${{ env.SERVICE_TYPE }}.json
+          cd starc-admin-fe
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout -b feature/design-token-update-${{ env.TIMESTAMP }}
+          git add .
+          git commit -m "Sync token json file from figma"
+          git push origin feature/design-token-update-${{ env.TIMESTAMP }}
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.TARGET_REPO_ACCESS_TOKEN }}
+          commit-message: Sync file.txt from source repository
+          committer: GitHub <noreply@github.com>
+          author: GitHub <noreply@github.com>
+          title: Sync file.txt from source repository
+          body: This PR syncs file.txt from source repository
+          labels: auto-merge
