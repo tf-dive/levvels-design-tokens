@@ -3,7 +3,7 @@
 //
 
 // Do not edit directly
-// Generated on Thu, 27 Jun 2024 02:49:45 GMT
+// Generated on Thu, 27 Jun 2024 05:52:11 GMT
 
 
 #import <Foundation/Foundation.h>
@@ -25,3 +25,16 @@ extern float const Typography14AccentFontWeight;
 extern float const Typography15FontWeight;
 extern float const Typography15AccentFontWeight;
 extern float const Typography20FontWeight;
+extern float const TypographyDisplay1FontWeight;
+extern float const TypographyDisplay2FontWeight;
+extern float const TypographyHeading1FontWeight;
+extern float const TypographyHeading2FontWeight;
+extern float const TypographyTitleFontWeight;
+extern float const TypographyBody1AccentFontWeight;
+extern float const TypographyBody1FontWeight;
+extern float const TypographyBody2AccentFontWeight;
+extern float const TypographyBody2FontWeight;
+extern float const TypographyCaption1AccentFontWeight;
+extern float const TypographyCaption1FontWeight;
+extern float const TypographyCaption2AccentFontWeight;
+extern float const TypographyCaption2FontWeight;
