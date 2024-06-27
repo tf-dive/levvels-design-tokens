@@ -67,12 +67,12 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: tf-dive/starc-admin-fe
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT }}
           ref: develop
 
       - name: Copy file to another repository
         run: |
-          git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/tf-dive/starc-admin-fe.git
+          git clone https://x-access-token:${{ secrets.PAT }}@github.com/tf-dive/starc-admin-fe.git
           cd starc-admin-fe
           cp ../tokens/${{ env.SERVICE_TYPE }}.json ./${{ env.SERVICE_TYPE }}.json
           git checkout -b feature/design-token-update-${{ env.TIMESTAMP }}
