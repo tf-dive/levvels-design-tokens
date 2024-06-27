@@ -13,6 +13,11 @@ jobs:
     # we run this on ubuntu, leave this alone, if you don't have a good reason to change it
     runs-on: ubuntu-latest
     steps:
+      - name: Set Current timestamp
+        id: timestamp
+        run: |
+          TIMESTAMP=$(TZ='Asia/Seoul' date +"%Y%m%dT%H%M%S.%N")
+          echo "TIMESTAMP=${TIMESTAMP}" >> $GITHUB_ENV
       # this lets us work in the actual repository 
       - uses: actions/checkout@master
       # if the folder named "tokens" does not exist, create it
@@ -45,6 +50,6 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "${{ github.event.client_payload.commitMessage }}"
+          git commit -m "Design tokens updated at ${{ env.TIMESTAMP }}"
           git push
         
