@@ -60,38 +60,55 @@ jobs:
           git commit -m "${{ env.SERVICE_TYPE }} Design tokens updated at ${{ env.TIMESTAMP }}"
           git push
 
-  sync-token-file:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout source repository
-        uses: actions/checkout@v3
-        with:
-          repository: tf-dive/starc-admin-fe
-          token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Set init.defaultBranch for new repositories
-        run: git config --global init.defaultBranch develop # 필요한 기본 브랜치 이름으로 변경
+        run: git config --global init.defaultBranch develop
+
+      - name: Checkout source repository
+        run: |
+          git clone https://github.com/tf-dive/starc-admin-fe.git
+          cd starc-admin-fe
+          git checkout develop
 
       - name: Copy file to another repository
         run: |
-          git clone https://x-access-token:${{ secrets.TARGET_REPO_ACCESS_TOKEN }}@github.com/tf-dive/starc-admin-fe.git
-          cp tokens/${{ env.SERVICE_TYPE }}.json starc-admin-fe/${{ env.SERVICE_TYPE }}.json
-          cd starc-admin-fe
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          cp ../tokens/${{ env.SERVICE_TYPE }}.json ./${{ env.SERVICE_TYPE }}.json
           git checkout -b feature/design-token-update-${{ env.TIMESTAMP }}
           git add .
           git commit -m "Sync token json file from figma"
           git push origin feature/design-token-update-${{ env.TIMESTAMP }}
 
-      # - name: Create Pull Request
-      #   uses: peter-evans/create-pull-request@v5
-      #   with:
-      #     token: ${{ secrets.TARGET_REPO_ACCESS_TOKEN }}
-      #     commit-message: Sync file.txt from source repository
-      #     committer: GitHub <noreply@github.com>
-      #     author: GitHub <noreply@github.com>
-      #     title: Sync file.txt from source repository
-      #     body: This PR syncs file.txt from source repository
-      #     labels: auto-merge
+  # sync-token-file:
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #     - name: Set init.defaultBranch for new repositories
+  #       run: git config --global init.defaultBranch develop
+
+  #     - name: Checkout source repository
+  #       run: |
+  #         git clone https://github.com/tf-dive/starc-admin-fe.git
+  #         cd source-repo
+  #         git checkout develop
+
+  #     - name: Copy file to another repository
+  #       run: |
+  #         git clone https://x-access-token:${{ secrets.TARGET_REPO_ACCESS_TOKEN }}@github.com/tf-dive/starc-admin-fe.git
+  #         cp tokens/${{ env.SERVICE_TYPE }}.json starc-admin-fe/${{ env.SERVICE_TYPE }}.json
+  #         cd starc-admin-fe
+  #         git config --global user.name 'github-actions[bot]'
+  #         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+  #         git checkout -b feature/design-token-update-${{ env.TIMESTAMP }}
+  #         git add .
+  #         git commit -m "Sync token json file from figma"
+  #         git push origin feature/design-token-update-${{ env.TIMESTAMP }}
+
+  # - name: Create Pull Request
+  #   uses: peter-evans/create-pull-request@v5
+  #   with:
+  #     token: ${{ secrets.TARGET_REPO_ACCESS_TOKEN }}
+  #     commit-message: Sync file.txt from source repository
+  #     committer: GitHub <noreply@github.com>
+  #     author: GitHub <noreply@github.com>
+  #     title: Sync file.txt from source repository
+  #     body: This PR syncs file.txt from source repository
+  #     labels: auto-merge
