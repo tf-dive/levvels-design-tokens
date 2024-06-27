@@ -3,6 +3,8 @@ const deepMerge = require("deepmerge");
 const webConfig = require('./src/web/index.js')
 const androidConfig = require("./src/android/index.js");
 
+const buildPath = `build/${process.env.SERVICE_TYPE}`;
+
 StyleDictionary.registerTransform({
   name: 'size/px',
   type: 'value',
@@ -48,7 +50,7 @@ const StyleDictionaryExtended = StyleDictionary.extend({
   platforms: {
     scss: {
       transformGroup: "custom/css",
-      buildPath: "build/scss/",
+      buildPath: `${buildPath}/scss/`,
       files: [
         {
           destination: "_variables.scss",
@@ -59,7 +61,7 @@ const StyleDictionaryExtended = StyleDictionary.extend({
     },
     less: {
       transformGroup: "custom/css",
-      buildPath: "build/less/",
+      buildPath: `${buildPath}/less/`,
       files: [
         {
           destination: "_variables.less",
@@ -70,7 +72,7 @@ const StyleDictionaryExtended = StyleDictionary.extend({
     },
     css: {
       transformGroup: "custom/css",
-      buildPath: "build/css/",
+      buildPath: `${buildPath}/css/`,
       files: [
         {
           destination: "_variables.css",
@@ -84,7 +86,7 @@ const StyleDictionaryExtended = StyleDictionary.extend({
     },
     "json-flat": {
       transformGroup: "js",
-      buildPath: "build/json/",
+      buildPath: `${buildPath}/json/`,
       files: [
         {
           destination: "styles.json",
@@ -95,7 +97,7 @@ const StyleDictionaryExtended = StyleDictionary.extend({
     },
     ios: {
       transformGroup: "ios",
-      buildPath: "build/ios/",
+      buildPath: `${buildPath}/ios/`,
       files: [
         {
           destination: "StyleDictionaryColor.h",
@@ -138,7 +140,7 @@ const StyleDictionaryExtended = StyleDictionary.extend({
 
     "ios-swift-separate-enums": {
       transformGroup: "ios-swift-separate",
-      buildPath: "build/ios-swift/",
+      buildPath: `${buildPath}/ios-swift/`,
       files: [
         {
           destination: "StyleDictionaryColor.swift",
