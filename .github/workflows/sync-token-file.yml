@@ -35,6 +35,7 @@ jobs:
       - name: Get changed file path
         id: get_changed_file
         run: |
+          git fetch origin ${{ github.event.before }}
           echo "CHANGED_FILE=$(git --no-pager diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '.json')" >> $GITHUB_ENV
 
       - name: Copy file to target repository
