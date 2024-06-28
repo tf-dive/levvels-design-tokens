@@ -9,6 +9,11 @@ jobs:
   sync-file:
     runs-on: ubuntu-latest
 
+    permissions:
+      id-token: write
+      contents: read
+      packages: write
+
     steps:
       - name: Checkout source repository
         uses: actions/checkout@v4
@@ -22,7 +27,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: tf-dive/starc-admin-fe
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT }}
           path: starc-admin-fe
           ref: develop
 
@@ -45,4 +50,3 @@ jobs:
           author: GitHub <noreply@github.com>
           title: Sync file.txt from source repository
           body: This PR syncs file.txt from source repository
-          labels: auto-merge
