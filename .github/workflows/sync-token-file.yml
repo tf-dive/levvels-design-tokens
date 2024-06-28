@@ -10,10 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set Service Type
-        run: |
-          echo "FILE_PATH=${{ github.event.action. }}" >> $GITHUB_ENV
-
       - name: Checkout source repository
         uses: actions/checkout@v4
         with:
