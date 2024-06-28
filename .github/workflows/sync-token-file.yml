@@ -35,11 +35,12 @@ jobs:
       - name: Get changed file path
         id: get_changed_file
         run: |
-          echo "$(git --no-pager diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '.json')"
+          CHANGED_FILE=$(git --no-pager diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '.json') >> $GITHUB_ENV
+          echo "CHANGED_FILE=${CHANGED_FILE}" >> $GITHUB_ENV
 
       - name: Copy file to target repository
         run: |
-          cp levvels-design-tokens/tokens/* starc-admin-fe/
+          cp levvels-design-tokens/${{ env.GITHUB_ENV }} starc-admin-fe/
           cd starc-admin-fe
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
@@ -57,3 +58,4 @@ jobs:
           author: GitHub <noreply@github.com>
           title: Sync token file from source repository
           body: This PR syncs token file from source repository
+          labels: auto-merge
