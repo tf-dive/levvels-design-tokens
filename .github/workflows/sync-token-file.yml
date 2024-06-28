@@ -33,8 +33,9 @@ jobs:
 
       - name: Copy file to target repository
         run: |
-          cp levvels-design-tokens/${{ github.event.actions.paths }} target-repo/${{ github.event.actions.paths }}
-          cd target-repo
+          echo ${{ github.event.actions.paths }}
+          cp -rvf levvels-design-tokens/${{ github.event.actions.paths }} starc-admin-fe/${{ github.event.actions.paths }}
+          cd starc-admin-fe
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           git add .
@@ -44,9 +45,9 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
-          token: ${{ secrets.TARGET_REPO_ACCESS_TOKEN }}
+          token: ${{ secrets.PAT }}
           commit-message: Sync file.txt from source repository
           committer: GitHub <noreply@github.com>
           author: GitHub <noreply@github.com>
-          title: Sync file.txt from source repository
-          body: This PR syncs file.txt from source repository
+          title: Sync token file from source repository
+          body: This PR syncs token file from source repository
