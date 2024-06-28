@@ -36,12 +36,14 @@ jobs:
         id: get_changed_file
         run: |
           cd levvels-design-tokens
+          git fetch ${{ github.event.before }}
+          echo "$(git --no-pager diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '.json')"
           echo "CHANGED_FILE=$(git --no-pager diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '.json')" >> $GITHUB_ENV
           cd ..
 
       - name: Copy file to target repository
         run: |
-          cp levvels-design-tokens/${{ env.CHANGED_FILE }} starc-admin-fe/
+          cp -rvf levvels-design-tokens/${{ env.CHANGED_FILE }} starc-admin-fe/
           cd starc-admin-fe
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
