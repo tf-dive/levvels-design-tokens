@@ -9,12 +9,13 @@ jobs:
   sync-file:
     runs-on: ubuntu-latest
 
-    permissions:
-      id-token: write
-      contents: read
-      packages: write
-
     steps:
+       - name: Set Current timestamp
+        id: timestamp
+        run: |
+          TIMESTAMP=$(TZ='Asia/Seoul' date +"%Y.%m.%d %T")
+          echo "TIMESTAMP=${TIMESTAMP}" >> $GITHUB_ENV
+
       - name: Checkout source repository
         uses: actions/checkout@v4
         with:
@@ -42,9 +43,10 @@ jobs:
           cd starc-admin-fe
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout -b feature/design-token-update-${{ env.TIMESTAMP }}
           git add .
           git commit -m "Sync file.txt from source repository"
-          git push origin main
+          git push origin feature/design-token-update-${{ env.TIMESTAMP }}
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
