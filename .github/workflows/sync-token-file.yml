@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-       - name: Set Current timestamp
+      - name: Set Current timestamp
         id: timestamp
         run: |
           TIMESTAMP=$(TZ='Asia/Seoul' date +"%Y.%m.%d %T")
