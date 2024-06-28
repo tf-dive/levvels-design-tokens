@@ -36,7 +36,7 @@ jobs:
         id: get_changed_file
         run: |
           cd levvels-design-tokens
-          git fetch ${{ github.event.before }}
+          git fetch origin ${{ github.event.before }}
           echo "$(git --no-pager diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '.json')"
           echo "CHANGED_FILE=$(git --no-pager diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '.json')" >> $GITHUB_ENV
           cd ..
