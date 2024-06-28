@@ -1,0 +1,52 @@
+name: Sync File to Another Repository
+
+on:
+  push:
+    paths:
+      - "tokens/starc.json"
+      - "tokens/vuddy.json"
+jobs:
+  sync-file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set Service Type
+        run: |
+          echo "FILE_PATH=${{ github.event.action. }}" >> $GITHUB_ENV
+
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: levvels-design-tokens
+          ref: main
+
+      - name: Checkout target repository
+        uses: actions/checkout@v4
+        with:
+          repository: tf-dive/starc-admin-fe
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: starc-admin-fe
+          ref: develop
+
+      - name: Copy file to target repository
+        run: |
+          cp levvels-design-tokens/${{ github.event.actions.paths }} target-repo/${{ github.event.actions.paths }}
+          cd target-repo
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add .
+          git commit -m "Sync file.txt from source repository"
+          git push origin main
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.TARGET_REPO_ACCESS_TOKEN }}
+          commit-message: Sync file.txt from source repository
+          committer: GitHub <noreply@github.com>
+          author: GitHub <noreply@github.com>
+          title: Sync file.txt from source repository
+          body: This PR syncs file.txt from source repository
+          labels: auto-merge
