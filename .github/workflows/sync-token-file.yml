@@ -13,7 +13,7 @@ jobs:
       - name: Set Current timestamp
         id: timestamp
         run: |
-          TIMESTAMP=$(TZ='Asia/Seoul' date +"%Y.%m.%d %T")
+          TIMESTAMP=$(TZ='Asia/Seoul' date +"%Y-%m-%d")
           echo "TIMESTAMP=${TIMESTAMP}" >> $GITHUB_ENV
 
       - name: Checkout source repository
