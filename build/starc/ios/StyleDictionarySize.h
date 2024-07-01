@@ -3,28 +3,28 @@
 //
 
 // Do not edit directly
-// Generated on Thu, 27 Jun 2024 10:32:34 GMT
+// Generated on Mon, 01 Jul 2024 08:13:15 GMT
 
 
 #import <Foundation/Foundation.h>
 
 
-extern float const Typography11FontWeight;
-extern float const Typography14FontWeight;
-extern float const Typography16FontWeight;
-extern float const Typography18FontWeight;
-extern float const Typography22FontWeight;
-extern float const Typography24FontWeight;
-extern float const Typography28FontWeight;
-extern float const Typography32FontWeight;
-extern float const Typography36FontWeight;
-extern float const Typography11AccentFontWeight;
-extern float const Typography12FontWeight;
-extern float const Typography12AccentFontWeight;
-extern float const Typography14AccentFontWeight;
-extern float const Typography15FontWeight;
-extern float const Typography15AccentFontWeight;
-extern float const Typography20FontWeight;
+extern float const TypographyCaptionSmFontWeight;
+extern float const TypographyCaptionSmAccentFontWeight;
+extern float const TypographyCaptionBaseFontWeight;
+extern float const TypographyCaptionBaseAccentFontWeight;
+extern float const TypographyLabelBaseFontWeight;
+extern float const TypographyLabelBaseAccentFontWeight;
+extern float const TypographyBodyBaseFontWeight;
+extern float const TypographyBodyBaseAccentFontWeight;
+extern float const TypographyBodyLargeFontWeight;
+extern float const TypographyTitleSmallFontWeight;
+extern float const TypographyTitleBaseFontWeight;
+extern float const TypographyTitleLargeFontWeight;
+extern float const TypographyTitleXlFontWeight;
+extern float const TypographyDisplaySmallFontWeight;
+extern float const TypographyDisplayBaseFontWeight;
+extern float const TypographyDisplayLargeFontWeight;
 extern float const TypographyDisplay1FontWeight;
 extern float const TypographyDisplay2FontWeight;
 extern float const TypographyHeading1FontWeight;

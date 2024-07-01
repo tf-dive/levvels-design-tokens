@@ -4,28 +4,28 @@
 //
 
 // Do not edit directly
-// Generated on Thu, 27 Jun 2024 10:32:34 GMT
+// Generated on Mon, 01 Jul 2024 08:13:15 GMT
 
 
 #import "StyleDictionarySize.h"
 
 
-float const Typography11FontWeight = 400;
-float const Typography14FontWeight = 400;
-float const Typography16FontWeight = 400;
-float const Typography18FontWeight = 700;
-float const Typography22FontWeight = 500;
-float const Typography24FontWeight = 700;
-float const Typography28FontWeight = 700;
-float const Typography32FontWeight = 600;
-float const Typography36FontWeight = 600;
-float const Typography11AccentFontWeight = 700;
-float const Typography12FontWeight = 400;
-float const Typography12AccentFontWeight = 700;
-float const Typography14AccentFontWeight = 700;
-float const Typography15FontWeight = 400;
-float const Typography15AccentFontWeight = 700;
-float const Typography20FontWeight = 600;
+float const TypographyCaptionSmFontWeight = 400;
+float const TypographyCaptionSmAccentFontWeight = 700;
+float const TypographyCaptionBaseFontWeight = 400;
+float const TypographyCaptionBaseAccentFontWeight = 700;
+float const TypographyLabelBaseFontWeight = 400;
+float const TypographyLabelBaseAccentFontWeight = 700;
+float const TypographyBodyBaseFontWeight = 400;
+float const TypographyBodyBaseAccentFontWeight = 700;
+float const TypographyBodyLargeFontWeight = 400;
+float const TypographyTitleSmallFontWeight = 700;
+float const TypographyTitleBaseFontWeight = 600;
+float const TypographyTitleLargeFontWeight = 500;
+float const TypographyTitleXlFontWeight = 700;
+float const TypographyDisplaySmallFontWeight = 700;
+float const TypographyDisplayBaseFontWeight = 600;
+float const TypographyDisplayLargeFontWeight = 600;
 float const TypographyDisplay1FontWeight = 700;
 float const TypographyDisplay2FontWeight = 700;
 float const TypographyHeading1FontWeight = 700;
