@@ -3,8 +3,8 @@ name: Sync File to Another Repository
 on:
   push:
     paths:
-      - "tokens/starc.json"
       - "tokens/vuddy.json"
+      - "tokens/starc.json"
 jobs:
   sync-file:
     runs-on: ubuntu-latest
