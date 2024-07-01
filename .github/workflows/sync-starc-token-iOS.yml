@@ -1,0 +1,63 @@
+name: Sync starc File to Repository
+
+on:
+  push:
+    paths:
+      - "tokens/starc.json"
+jobs:
+  sync-file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set Current timestamp
+        id: timestamp
+        run: |
+          TIMESTAMP=$(TZ='Asia/Seoul' date +"%Y-%m-%d-%H%M")
+          echo "TIMESTAMP=${TIMESTAMP}" >> $GITHUB_ENV
+
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: levvels-design-tokens
+          ref: main
+
+      - name: Checkout target repository
+        uses: actions/checkout@v4
+        with:
+          repository: tf-dive/Star_iOS
+          token: ${{ secrets.PAT }}
+          path: Star_iOS
+          ref: develop
+
+      - name: Get changed file path
+        id: get_changed_file
+        run: |
+          cd levvels-design-tokens
+          git fetch origin ${{ github.event.before }}
+          echo "$(git --no-pager diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '.json')"
+          echo "CHANGED_FILE=$(git --no-pager diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '.json')" >> $GITHUB_ENV
+          cd ..
+
+      - name: Copy file to target repository
+        run: |
+          BRANCH_NAME="feature/design-token-update-${{ env.TIMESTAMP }}"
+
+          cp -rvf levvels-design-tokens/${{ env.CHANGED_FILE }} Star_iOS/Modules/Core/Sources/DesignTokens
+          cd Star_iOS
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout -b $BRANCH_NAME
+          git add .
+          git commit -m "Sync file.txt from source repository"
+          git push origin $BRANCH_NAME
+
+          echo "${{ secrets.PAT }}" > token.txt
+
+          gh auth login --with-token < token.txt
+          gh pr create \
+            --body "" \
+            --title "chore: update design token" \
+            --head "$BRANCH_NAME" \
+            --base "develop"
