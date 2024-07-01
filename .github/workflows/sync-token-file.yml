@@ -5,7 +5,7 @@ on:
     paths:
       - "tokens/**"
   workflow_run:
-    workflows: ['Transform tokens send from figma']
+    workflows: [Transform]
       types:
         - completed
 
