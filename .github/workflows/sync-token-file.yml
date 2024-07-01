@@ -24,12 +24,13 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           path: levvels-design-tokens
           ref: main
+          fetch-depth: 2
 
       - name: Get previous commit SHA
         id: previous_commit
         run: |
           cd levvels-design-tokens
-          echo "PREVIOUS_SHA=$(git rev-parse HEAD~1)" >> $GIT_ENV
+          echo "PREVIOUS_SHA=$(git rev-parse HEAD^1)" >> $GIT_ENV
           cd ..
 
       - name: Get changed file path
