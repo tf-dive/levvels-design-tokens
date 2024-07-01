@@ -30,8 +30,9 @@ jobs:
           cd levvels-design-tokens
           git fetch origin ${{ github.event.before }}
           echo "$(git --no-pager diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '.json')"
-          echo "CHANGED_FILE=$(git --no-pager diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '.json')" >> $GITHUB_ENV
-          echo "TARGET_REPO=[[ CHANGED_FILE == tokens/starc.json ]] && starc-admin-fe || vuddy-fe" >> $GITHUB_ENV
+          CHANGED_FILE=$(git --no-pager diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '.json')
+          echo "CHANGED_FILE=${CHANGED_FILE}" >> $GITHUB_ENV
+          if [[ ${CHANGED_FILE} == *starc* ]]; then echo "TARGET_REPO=starc-admin-fe" >> $GITHUB_ENV; else echo "TARGET_REPO=vuddy-fe" >> $GITHUB_ENV; fi
           cd ..
 
       - name: Checkout target repository
