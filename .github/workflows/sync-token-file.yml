@@ -30,7 +30,7 @@ jobs:
         id: previous_commit
         run: |
           cd levvels-design-tokens
-          echo "PREVIOUS_SHA=$(git rev-parse HEAD^1)" >> $GIT_ENV
+          echo "PREVIOUS_SHA=$(git rev-parse HEAD~1)" >> $GITHUB_ENV
           cd ..
 
       - name: Get changed file path
