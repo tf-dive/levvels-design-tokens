@@ -24,14 +24,6 @@ jobs:
           path: levvels-design-tokens
           ref: main
 
-      - name: Checkout target repository
-        uses: actions/checkout@v4
-        with:
-          repository: tf-dive/starc-admin-fe
-          token: ${{ secrets.PAT }}
-          path: starc-admin-fe
-          ref: develop
-
       - name: Get changed file path
         id: get_changed_file
         run: |
@@ -39,14 +31,23 @@ jobs:
           git fetch origin ${{ github.event.before }}
           echo "$(git --no-pager diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '.json')"
           echo "CHANGED_FILE=$(git --no-pager diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '.json')" >> $GITHUB_ENV
+          echo "TARGET_REPO=[[ ${{ env.CHANGED_FILE }} == tokens/starc.json ]] && starc-admin-fe || vuddy-fe
           cd ..
+
+      - name: Checkout target repository
+        uses: actions/checkout@v4
+        with:
+          repository: tf-dive/${{ env.TARGET_REPO }}
+          token: ${{ secrets.PAT }}
+          path: ${{ env.TARGET_REPO }}
+          ref: develop
 
       - name: Copy file to target repository
         run: |
           BRANCH_NAME="feature/design-token-update-${{ env.TIMESTAMP }}"
 
-          cp -rvf levvels-design-tokens/${{ env.CHANGED_FILE }} starc-admin-fe/
-          cd starc-admin-fe
+          cp -rvf levvels-design-tokens/${{ env.CHANGED_FILE }} ${{ env.TARGET_REPO }}/
+          cd ${{ env.TARGET_REPO }}
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           git checkout -b $BRANCH_NAME
@@ -54,9 +55,9 @@ jobs:
           git commit -m "Sync file.txt from source repository"
           git push origin $BRANCH_NAME
 
-          echo "${{ secrets.PAT }}" > token.txt
+          echo "${{ secrets.PAT }}" > token
 
-          gh auth login --with-token < token.txt
+          gh auth login --with-token < token
           gh pr create \
             --body "" \
             --title "chore: update design token" \
