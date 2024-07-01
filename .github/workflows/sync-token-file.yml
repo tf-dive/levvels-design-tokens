@@ -4,6 +4,10 @@ on:
   push:
     paths:
       - "tokens/**"
+workflow_run:
+  workflows: ['Transform tokens send from figma']
+    types:
+      - completed
 
 jobs:
   sync-file:
