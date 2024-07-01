@@ -1,13 +1,10 @@
 name: Sync File to Another Repository
 
 on:
-  push:
-    paths:
-      - "tokens/**"
   workflow_run:
     workflows: [Transform]
-      types:
-        - completed
+    types:
+      - completed
 
 jobs:
   sync-file:
