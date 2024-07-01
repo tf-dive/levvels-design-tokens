@@ -43,22 +43,33 @@ jobs:
 
       - name: Copy file to target repository
         run: |
+          BRANCH_NAME="feature/design-token-update-${{ env.TIMESTAMP }}"
+
           cp -rvf levvels-design-tokens/${{ env.CHANGED_FILE }} starc-admin-fe/
           cd starc-admin-fe
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git checkout -b feature/design-token-update-${{ env.TIMESTAMP }}
+          git checkout -b $BRANCH_NAME
           git add .
           git commit -m "Sync file.txt from source repository"
-          git push origin feature/design-token-update-${{ env.TIMESTAMP }}
+          git push origin $BRANCH_NAME
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.PAT }}
-          commit-message: Sync file.txt from source repository
-          committer: GitHub <noreply@github.com>
-          author: GitHub <noreply@github.com>
-          title: Sync token file from source repository
-          body: This PR syncs token file from source repository
-          labels: auto-merge
+          echo "${{ secrets.PAT }}" > token.txt
+
+          gh auth login --with-token < token.txt
+          gh pr create \
+            --body "" \
+            --title "chore: update design token" \
+            --head "$BRANCH_NAME" \
+            --base "main"
+
+      # - name: Create Pull Request
+      #   uses: peter-evans/create-pull-request@v5
+      #   with:
+      #     token: ${{ secrets.PAT }}
+      #     commit-message: Sync file.txt from source repository
+      #     committer: GitHub <noreply@github.com>
+      #     author: GitHub <noreply@github.com>
+      #     title: Sync token file from source repository
+      #     body: This PR syncs token file from source repository
+      #     labels: auto-merge
