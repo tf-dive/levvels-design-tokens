@@ -31,7 +31,7 @@ jobs:
           git fetch origin ${{ github.event.before }}
           echo "$(git --no-pager diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '.json')"
           echo "CHANGED_FILE=$(git --no-pager diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '.json')" >> $GITHUB_ENV
-          echo "TARGET_REPO=[[ ${{ env.CHANGED_FILE }} == tokens/starc.json ]] && starc-admin-fe || vuddy-fe
+          echo "TARGET_REPO=[[ CHANGED_FILE == tokens/starc.json ]] && starc-admin-fe || vuddy-fe >> $GITHUB_ENV
           cd ..
 
       - name: Checkout target repository
