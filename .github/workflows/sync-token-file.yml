@@ -25,13 +25,18 @@ jobs:
           path: levvels-design-tokens
           ref: main
 
+      - name: Get previous commit SHA
+        id: previous_commit
+        run: |
+          cd levvels-design-tokens
+          echo "::set-output name=SHA::$(git rev-parse HEAD~1)"
+
       - name: Get changed file path
         id: get_changed_file
         run: |
-          cd levvels-design-tokens
-          git fetch origin ${{ github.event.before }}
-          echo "$(git --no-pager diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '.json')"
-          CHANGED_FILE=$(git --no-pager diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '.json')
+          git fetch origin ${{ steps.previous_commit.outputs.SHA }}
+          echo "$(git --no-pager diff --name-only ${{ steps.previous_commit.outputs.SHA }} ${{ github.sha }} | grep '.json')"
+          CHANGED_FILE=$(git --no-pager diff --name-only ${{ steps.previous_commit.outputs.SHA }} ${{ github.sha }} | grep '.json')
           echo "CHANGED_FILE=${CHANGED_FILE}" >> $GITHUB_ENV
           if [[ ${CHANGED_FILE} == *starc* ]]; then echo "TARGET_REPO=starc-admin-fe" >> $GITHUB_ENV; else echo "TARGET_REPO=vuddy-fe" >> $GITHUB_ENV; fi
           cd ..
