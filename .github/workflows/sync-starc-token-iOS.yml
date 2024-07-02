@@ -70,7 +70,7 @@ jobs:
           gh auth login --with-token < token
           gh pr create \
             --body "" \
-            --title "chore: update design token" \
+            --title "🎨 update design token" \
             --head "$BRANCH_NAME" \
             --base "develop"
 
