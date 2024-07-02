@@ -48,7 +48,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: tf-dive/${{ env.TARGET_REPO }}
-          token: ${{ secrets.PAT }}
+          token: ${{ secrets.PATO }}
           path: ${{ env.TARGET_REPO }}
           ref: develop
 
@@ -65,7 +65,7 @@ jobs:
           git commit -m "Sync file.txt from source repository"
           git push origin $BRANCH_NAME
 
-          echo "${{ secrets.PAT }}" > token
+          echo "${{ secrets.PATO }}" > token
 
           gh auth login --with-token < token
           gh pr create \
