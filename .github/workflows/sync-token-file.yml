@@ -44,6 +44,13 @@ jobs:
           if [[ ${CHANGED_FILE} == *starc* ]]; then echo "TARGET_REPO=starc-admin-fe" >> $GITHUB_ENV; else echo "TARGET_REPO=vuddy-fe" >> $GITHUB_ENV; fi
           cd ..
 
+      - name: Transform Token Json To Typescript
+        run: |
+          cd levvels-design-tokens
+          echo "npm run transform:fe ${CHANGED_FILE}"
+          if [[ ${CHANGED_FILE} == *starc* ]]; then echo "TRANSFORM_FILE=fe/starcDesignToken.ts" >> $GITHUB_ENV; else echo "TRANSFORM_FILE=fe/vuddyDesignToken.ts" >> $GITHUB_ENV; fi
+          cd ..
+
       - name: Checkout target repository
         uses: actions/checkout@v4
         with:
@@ -56,7 +63,7 @@ jobs:
         run: |
           BRANCH_NAME="feature/design-token-update-${{ env.TIMESTAMP }}"
 
-          cp -rvf levvels-design-tokens/${{ env.CHANGED_FILE }} ${{ env.TARGET_REPO }}/
+          cp -rvf levvels-design-tokens/${{ env.TRANSFORM_FILE }} ${{ env.TARGET_REPO }}/
           cd ${{ env.TARGET_REPO }}
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
@@ -73,14 +80,3 @@ jobs:
             --title "chore: update design token" \
             --head "$BRANCH_NAME" \
             --base "develop"
-
-      # - name: Create Pull Request
-      #   uses: peter-evans/create-pull-request@v5
-      #   with:
-      #     token: ${{ secrets.PAT }}
-      #     commit-message: Sync file.txt from source repository
-      #     committer: GitHub <noreply@github.com>
-      #     author: GitHub <noreply@github.com>
-      #     title: Sync token file from source repository
-      #     body: This PR syncs token file from source repository
-      #     labels: auto-merge
