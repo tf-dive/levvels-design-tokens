@@ -5,6 +5,14 @@ on:
     workflows: [Transform]
     types:
       - completed
+  workflow_dispatch:
+    inputs:
+      target:
+        type: choice
+        options:
+          - starc
+          - vuddy
+        default: ""
 
 jobs:
   sync-file:
@@ -26,8 +34,14 @@ jobs:
           ref: main
           fetch-depth: 2
 
+      - name: Set target repo from dispatch inputs
+        if: github.event.inputs.target != ''
+        run: |
+          if [[ {{ github.event.inputs.target }} == starc ]]; then echo "TARGET_REPO=starc-admin-fe" >> $GITHUB_ENV; else echo "TARGET_REPO=vuddy-fe" >> $GITHUB_ENV; fi
+
       - name: Get previous commit SHA
         id: previous_commit
+        if: github.event.inputs.target == ''
         run: |
           cd levvels-design-tokens
           echo "PREVIOUS_SHA=$(git rev-parse HEAD~1)" >> $GITHUB_ENV
@@ -35,6 +49,7 @@ jobs:
 
       - name: Get changed file path
         id: get_changed_file
+        if: github.event.inputs.target == ''
         run: |
           cd levvels-design-tokens
           git fetch origin ${{ env.PREVIOUS_SHA }}
@@ -48,7 +63,7 @@ jobs:
         run: |
           cd levvels-design-tokens
           echo "npm run transform:fe ${CHANGED_FILE}"
-          if [[ ${CHANGED_FILE} == *starc* ]]; then echo "TRANSFORM_FILE=fe/starcDesignToken.ts" >> $GITHUB_ENV; else echo "TRANSFORM_FILE=fe/vuddyDesignToken.ts" >> $GITHUB_ENV; fi
+          if [[ ${TARGET_REPO} == *starc* ]]; then echo "TRANSFORM_FILE=fe/starcDesignToken.ts" >> $GITHUB_ENV; else echo "TRANSFORM_FILE=fe/vuddyDesignToken.ts" >> $GITHUB_ENV; fi
           cd ..
 
       - name: Checkout target repository
