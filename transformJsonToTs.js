@@ -34,10 +34,12 @@ fs.readFile(absolutePath, "utf8", (err, data) => {
   }
 
   const tokenStrings = [];
+  const tokenVariableNames = [];
   for (let tokenName in jsonData) {
     const tokenVariableName = dashToCamelCase(tokenName);
     const flattedTokenJson = flattenObject(jsonData[tokenName], "_");
 
+    tokenVariableNames.push(tokenVariableName);
     tokenStrings.push(
       `const ${tokenVariableName} = ${JSON.stringify(
         flattedTokenJson,
@@ -65,7 +67,9 @@ fs.readFile(absolutePath, "utf8", (err, data) => {
   // TypeScript 파일에 쓰기
   fs.writeFile(
     filePath,
-    tokenStrings.join("").replace(/"__(.*?)__"/g, "$1"),
+    `${tokenStrings.join("").replace(/"__(.*?)__"/g, "$1")}
+    
+export { ${tokenVariableNames.join(", ")} }`,
     (writeErr) => {
       if (writeErr) {
         console.error("Error writing TypeScript file:", writeErr);

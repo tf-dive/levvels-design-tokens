@@ -1,4 +1,4 @@
-const fontToken = {
+const font = {
   "displayBase": {
     "fontSize": 36,
     "textDecoration": "none",
@@ -196,7 +196,7 @@ const fontToken = {
   }
 } as const;
   
-const effectToken = {
+const effect = {
   "shadowHigh_0": {
     "shadowType": "dropShadow",
     "radius": 6,
@@ -255,7 +255,7 @@ const effectToken = {
   }
 } as const;
   
-const sizeToken = {
+const size = {
   "radius_xs": 4,
   "radius_base": 8,
   "radius_large": 12,
@@ -296,7 +296,7 @@ const sizeToken = {
   "padding_4xl": 64
 } as const;
   
-const globalColorToken = {
+const globalColor = {
   "gray950": "#030712ff",
   "gray900": "#111827ff",
   "gray800": "#1f2937ff",
@@ -388,10 +388,20 @@ const globalColorToken = {
   "white30": "#ffffff4d",
   "white20": "#ffffff33",
   "white10": "#ffffff1a",
-  "white5": "#ffffff0d"
+  "white5": "#ffffff0d",
+  "mint900": "#002b26ff",
+  "mint800": "#004d44ff",
+  "mint700": "#007668ff",
+  "mint600": "#009e8cff",
+  "mint500": "#00bfa8ff",
+  "mint400": "#0bead0ff",
+  "mint300": "#36ffe7ff",
+  "mint200": "#90fff2ff",
+  "mint100": "#cafff9ff",
+  "mint50": "#e4fffcff"
 } as const;
   
-const typographyToken = {
+const typography = {
   "displayBase_fontSize": 36,
   "displayBase_textDecoration": "none",
   "displayBase_fontFamily": "Pretendard",
@@ -559,73 +569,90 @@ const typographyToken = {
   "captionSmall_textCase": "none"
 } as const;
   
-const aliasToken = {
-  "text_primary": globalColorToken.gray950,
-  "text_secondary": globalColorToken.gray700,
-  "text_tertiary": globalColorToken.gray500,
-  "text_disabled": globalColorToken.gray300,
-  "text_accent": globalColorToken.blue600,
-  "text_success": globalColorToken.green600,
-  "text_danger": globalColorToken.red600,
-  "text_vuddyPrimary": globalColorToken.purple600,
-  "text_vuddySecondary": globalColorToken.purple400,
-  "text_whitePrimary": globalColorToken.white100,
-  "text_whiteSecondary": globalColorToken.white70,
-  "icon_primary": globalColorToken.gray950,
-  "icon_secondary": globalColorToken.gray700,
-  "icon_tertiary": globalColorToken.gray500,
-  "icon_disabled": globalColorToken.gray300,
-  "icon_vuddyPrimary": globalColorToken.purple600,
-  "icon_vuddySecondary": globalColorToken.purple400,
-  "icon_whitePrimary": globalColorToken.white100,
-  "icon_whiteSecondary": globalColorToken.white70,
-  "icon_accent": globalColorToken.blue600,
-  "icon_success": globalColorToken.green600,
-  "icon_danger": globalColorToken.red600,
-  "line_dividerPrimary": globalColorToken.gray200,
-  "line_dividerSecondary": globalColorToken.gray100,
-  "line_vuddyPrimary": globalColorToken.purple600,
-  "line_vuddySecondary": globalColorToken.purple400,
-  "line_whitePrimary": globalColorToken.white100,
-  "line_whiteSecondary": globalColorToken.white70,
-  "line_accent": globalColorToken.blue600,
-  "line_success": globalColorToken.green600,
-  "line_danger": globalColorToken.red600,
-  "line_imgOutline": globalColorToken.black5,
-  "line_blackPrimary": globalColorToken.black100,
-  "line_blackSecondary": globalColorToken.black70,
-  "line_containerOutline": globalColorToken.gray200,
-  "surface_vuddyPrimary": globalColorToken.purple600,
-  "surface_vuddySecondary": globalColorToken.purple400,
-  "surface_accent": globalColorToken.blue600,
-  "surface_success": globalColorToken.green600,
-  "surface_danger": globalColorToken.red600,
-  "surface_primary": globalColorToken.white100,
-  "surface_secondary": globalColorToken.gray50,
-  "surface_tertiary": globalColorToken.gray75,
-  "surface_quaternary": globalColorToken.gray100,
-  "surface_dimHigh": globalColorToken.black70,
-  "surface_dim": globalColorToken.black50,
-  "surface_pressed": globalColorToken.black10,
-  "surface_black": globalColorToken.black100,
-  "surface_hover": globalColorToken.black5,
-  "surface_whiteSecondary": globalColorToken.white50,
-  "surface_whiteTertiary": globalColorToken.white20,
-  "button_primary": globalColorToken.purple600,
-  "button_primaryPressed": globalColorToken.purple800,
-  "button_primaryDisabled": globalColorToken.purple100,
-  "button_secondary": globalColorToken.gray200,
-  "button_secondaryPressed": globalColorToken.gray300,
-  "button_secondaryDisabled": globalColorToken.gray50,
-  "button_white": globalColorToken.white100,
-  "button_whitePressed": globalColorToken.white70,
-  "button_whiteDisabled": globalColorToken.white30,
-  "button_primaryHover": globalColorToken.purple700,
-  "button_secondaryHover": globalColorToken.gray250,
-  "button_whiteHover": globalColorToken.white80,
-  "button_tertiary": globalColorToken.gray75,
-  "button_tertiaryHover": globalColorToken.gray100,
-  "button_tertiaryPressed": globalColorToken.gray200,
-  "button_tertiaryDisabled": globalColorToken.gray50
+const alias = {
+  "text_primary": globalColor.gray950,
+  "text_secondary": globalColor.gray700,
+  "text_tertiary": globalColor.gray500,
+  "text_disabled": globalColor.gray300,
+  "text_accent": globalColor.blue600,
+  "text_success": globalColor.green600,
+  "text_danger": globalColor.red600,
+  "text_vuddyNegative": globalColor.mint400,
+  "text_vuddyPositive": globalColor.mint600,
+  "text_whitePrimary": globalColor.white100,
+  "text_whiteSecondary": globalColor.white70,
+  "text_caution": globalColor.yellow600,
+  "text_whiteDisabled": globalColor.white30,
+  "icon_primary": globalColor.gray950,
+  "icon_secondary": globalColor.gray700,
+  "icon_tertiary": globalColor.gray500,
+  "icon_disabled": globalColor.gray300,
+  "icon_vuddyNegative": globalColor.mint400,
+  "icon_vuddyPositive": globalColor.mint600,
+  "icon_whitePrimary": globalColor.white100,
+  "icon_whiteSecondary": globalColor.white70,
+  "icon_accent": globalColor.blue600,
+  "icon_success": globalColor.green600,
+  "icon_danger": globalColor.red600,
+  "icon_caution": globalColor.yellow600,
+  "icon_whiteDisabled": globalColor.white30,
+  "line_dividerPrimary": globalColor.gray200,
+  "line_dividerSecondary": globalColor.gray100,
+  "line_vuddyNegative": globalColor.mint400,
+  "line_vuddyPositive": globalColor.mint600,
+  "line_whitePrimary": globalColor.white100,
+  "line_whiteSecondary": globalColor.white70,
+  "line_accent": globalColor.blue600,
+  "line_success": globalColor.green600,
+  "line_danger": globalColor.red600,
+  "line_imgOutline": globalColor.black5,
+  "line_blackPrimary": globalColor.black100,
+  "line_blackSecondary": globalColor.black70,
+  "line_containerOutline": globalColor.gray200,
+  "line_caution": globalColor.yellow600,
+  "line_whiteDisabled": globalColor.white30,
+  "surface_vuddyPrimary": globalColor.mint600,
+  "surface_vuddySecondary": globalColor.mint400,
+  "surface_accent": globalColor.blue600,
+  "surface_success": globalColor.green600,
+  "surface_danger": globalColor.red600,
+  "surface_primary": globalColor.white100,
+  "surface_secondary": globalColor.gray50,
+  "surface_tertiary": globalColor.gray75,
+  "surface_quaternary": globalColor.gray100,
+  "surface_dimHigh": globalColor.black70,
+  "surface_dim": globalColor.black50,
+  "surface_pressed": globalColor.black10,
+  "surface_black": globalColor.black100,
+  "surface_hover": globalColor.black5,
+  "surface_whiteSecondary": globalColor.white50,
+  "surface_whiteTertiary": globalColor.white20,
+  "surface_dimLow": globalColor.black20,
+  "surface_vuddyTertiary": globalColor.mint200,
+  "surface_vuddyQuaternary": globalColor.mint100,
+  "surface_caution": globalColor.yellow600,
+  "surface_accentLowest": globalColor.blue50,
+  "surface_successLowest": globalColor.green50,
+  "surface_dangerLowest": globalColor.red50,
+  "surface_cautionLowest": globalColor.yellow50,
+  "button_primary": globalColor.gray950,
+  "button_primaryPressed": globalColor.gray700,
+  "button_primaryDisabled": globalColor.gray75,
+  "button_secondary": globalColor.mint200,
+  "button_secondaryPressed": globalColor.mint400,
+  "button_secondaryDisabled": globalColor.mint50,
+  "button_white": globalColor.white100,
+  "button_whitePressed": globalColor.white70,
+  "button_whiteDisabled": globalColor.white30,
+  "button_primaryHover": globalColor.gray800,
+  "button_secondaryHover": globalColor.mint300,
+  "button_whiteHover": globalColor.white80,
+  "button_tertiary": globalColor.gray100,
+  "button_tertiaryHover": globalColor.gray200,
+  "button_tertiaryPressed": globalColor.gray250,
+  "button_tertiaryDisabled": globalColor.gray75
 } as const;
   
+
+    
+    export { font, effect, alias, size, globalColor, typography }

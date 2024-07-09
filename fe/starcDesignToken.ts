@@ -651,7 +651,7 @@ const componentSpecific = {
   "button_tertiary_textDisabled": alias.text_quinary,
   "button_tertiary_textSelected": alias.text_whitePrimary,
   "button_quaternary_default": alias.surface_primary,
-  "button_quaternary_pressed": alias.surface_secondary,
+  "button_quaternary_pressed": alias.surface_tertiary,
   "button_quaternary_disabled": alias.surface_secondary,
   "button_quaternary_line": alias.line_primary,
   "button_quaternary_text": alias.text_accentBlue,
@@ -660,7 +660,7 @@ const componentSpecific = {
   "tag_upload_child": globalColor.blue50,
   "tag_upload_selected": alias.surface_primary,
   "tag_upload_normalPressed": alias.surface_secondary,
-  "tag_upload_selectedPressed": alias.surface_secondary,
+  "tag_upload_selectedPressed": globalColor.blue50,
   "tag_upload_childPressed": globalColor.blue100,
   "tag_upload_normalLine": alias.line_primary,
   "tag_upload_normalText": alias.text_secondary,
@@ -672,20 +672,24 @@ const componentSpecific = {
   "tag_manual_normalLine": alias.text_secondary,
   "tag_manual_normalText": alias.text_secondary,
   "tag_manual_childText": alias.text_accentBlue,
-  "tag_manual_childSelected": globalColor.blue100,
-  "tag_tagStory_normalSelectedText": alias.accent_accentBlue,
+  "tag_manual_normalPressed": alias.surface_tertiary,
+  "tag_manual_childPressed": globalColor.blue100,
   "tag_tagStory_normal": alias.surface_primary,
-  "tag_tagStory_milePrimary": alias.surface_primary,
-  "tag_tagStory_normalSelected": alias.surface_secondary,
+  "tag_tagStory_mileTertiary": alias.surface_primary,
+  "tag_tagStory_normalPressed": alias.surface_secondary,
   "tag_tagStory_normalLine": globalColor.gray200,
-  "tag_tagStory_milePrimarySelected": alias.surface_primary,
-  "tag_tagStory_milePrimaryLine": globalColor.gray700,
-  "tag_tagStory_milePrimaryText": alias.text_secondary,
+  "tag_tagStory_mileTertiaryPressed": alias.surface_tertiary,
+  "tag_tagStory_mileTertiaryLine": globalColor.gray700,
+  "tag_tagStory_mileTertiaryText": alias.text_secondary,
   "tag_tagStory_mileSecondary": globalColor.gray700,
-  "tag_tagStory_mileSecondarySelected": globalColor.gray700,
-  "tag_tagStory_mileTertiary": globalColor.purple500,
-  "tag_tagStory_mileTertiarySelected": globalColor.purple600,
+  "tag_tagStory_mileSecondaryPressed": globalColor.gray800,
+  "tag_tagStory_milePrimary": globalColor.purple500,
+  "tag_tagStory_milePrimaryPressed": globalColor.purple600,
   "tag_tagStory_mileSecondaryText": alias.text_whitePrimary,
-  "tag_tagStory_mileTertiaryText": alias.text_whitePrimary
+  "tag_tagStory_milePrimaryText": alias.text_whitePrimary,
+  "tag_tagStory_normalText": alias.text_accentBlue
 } as const;
   
+
+    
+export { font, effect, globalColor, size, alias, componentSpecific, typography }
