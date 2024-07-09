@@ -37,7 +37,7 @@ jobs:
       - name: Set target repo from dispatch inputs
         if: github.event.inputs.target != ''
         run: |
-          if [[ {{ github.event.inputs.target }} == starc ]]; then echo "TARGET_REPO=starc-admin-fe" >> $GITHUB_ENV; else echo "TARGET_REPO=vuddy-fe" >> $GITHUB_ENV; fi
+          if [[ "${{ github.event.inputs.target }}" == "starc" ]]; then echo "TARGET_REPO=starc-admin-fe" >> $GITHUB_ENV; else echo "TARGET_REPO=vuddy-fe" >> $GITHUB_ENV; fi
 
       - name: Get previous commit SHA
         id: previous_commit
