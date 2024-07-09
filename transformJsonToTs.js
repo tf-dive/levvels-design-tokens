@@ -89,8 +89,7 @@ fs.readFile(absolutePath, "utf8", (err, data) => {
   // TypeScript 파일에 쓰기
   fs.writeFile(
     filePath,
-    `
-// !이 파일은 자동 생성된 파일이니까 수기로 수정하지 마세요! 임의로 수정 노노!
+    `const a = 1;
 
 ${tokenStrings.join("").replace(/"__(.*?)__"/g, "$1")}`,
     (writeErr) => {
