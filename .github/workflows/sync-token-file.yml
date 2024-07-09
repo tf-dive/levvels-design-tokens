@@ -64,7 +64,7 @@ jobs:
         run: |
           cd levvels-design-tokens
           if [[ ${TARGET_REPO} == *starc* ]]; then echo "TRANSFORM_FILE=fe/starcDesignToken.ts" >> $GITHUB_ENV; else echo "TRANSFORM_FILE=fe/vuddyDesignToken.ts" >> $GITHUB_ENV; fi
-          rm {{ env.TRANSFORM_FILE }}
+          if [[ ${TARGET_REPO} == *starc* ]]; then echo "rm fe/starcDesignToken.ts"; else echo "rm fe/vuddyDesignToken.ts"; fi
           echo "npm run transform:fe ${CHANGED_FILE}"
           cd ..
 
