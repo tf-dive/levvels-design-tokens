@@ -87,17 +87,21 @@ fs.readFile(absolutePath, "utf8", (err, data) => {
   const filePath = path.join("./fe", outputFileName);
 
   // TypeScript 파일에 쓰기
-  fs.writeFile(
-    filePath,
-    `const a = 1;
+  new Promise((resolve, reject) =>
+    fs.writeFile(
+      filePath,
+      `// 해당 파일은 자동으로 생성된 파일로 수기로 수정하지 마세요.
 
 ${tokenStrings.join("").replace(/"__(.*?)__"/g, "$1")}`,
-    (writeErr) => {
-      if (writeErr) {
-        console.error("Error writing TypeScript file:", writeErr);
-        process.exit(1);
+      (writeErr) => {
+        if (writeErr) {
+          console.error("Error writing TypeScript file:", writeErr);
+          reject();
+          process.exit(1);
+        }
+        console.log(`JSON data has been saved to ${outputFileName}`);
+        resolve();
       }
-      console.log(`JSON data has been saved to ${outputFileName}`);
-    }
+    )
   );
 });
