@@ -1,4 +1,4 @@
-const fontToken = {
+const font = {
   "captionSm": {
     "fontSize": 11,
     "textDecoration": "none",
@@ -222,7 +222,7 @@ const fontToken = {
   }
 } as const;
   
-const effectToken = {
+const effect = {
   "shadowSmall_0": {
     "shadowType": "dropShadow",
     "radius": 2,
@@ -273,7 +273,7 @@ const effectToken = {
   }
 } as const;
   
-const globalColorToken = {
+const globalColor = {
   "gray950": "#030712ff",
   "gray900": "#111827ff",
   "gray800": "#1f2937ff",
@@ -372,7 +372,7 @@ const globalColorToken = {
   "blue850": "#243a84ff"
 } as const;
   
-const sizeToken = {
+const size = {
   "gap_xs": 4,
   "gap_xl": 12,
   "gap_small": 6,
@@ -406,7 +406,7 @@ const sizeToken = {
   "line_large": 1.5
 } as const;
   
-const typographyToken = {
+const typography = {
   "captionSm_fontSize": 11,
   "captionSm_textDecoration": "none",
   "captionSm_fontFamily": "Lato",
@@ -596,96 +596,96 @@ const typographyToken = {
   "italicTest_textCase": "none"
 } as const;
   
-const aliasToken = {
-  "text_primary": globalColorToken.gray950,
-  "text_secondary": globalColorToken.gray700,
-  "text_tertiary": globalColorToken.gray500,
-  "text_quaternary": globalColorToken.gray400,
-  "text_accentBlue": globalColorToken.blue600,
-  "text_whitePrimary": globalColorToken.white,
-  "text_whiteSecondary": globalColorToken.alphaWhite70,
-  "text_warning": globalColorToken.red600,
-  "text_quinary": globalColorToken.gray300,
-  "text_success": globalColorToken.green600,
-  "line_primary": globalColorToken.gray200,
-  "line_secondary": globalColorToken.gray100,
-  "line_imgBorderBlack": globalColorToken.alphaBlack10,
-  "line_imgBorderWhite": globalColorToken.alphaWhite20,
-  "surface_primary": globalColorToken.white,
-  "surface_secondary": globalColorToken.gray50,
-  "surface_quaternary": globalColorToken.gray100,
-  "surface_tertiary": globalColorToken.gray75,
-  "surface_quinary": globalColorToken.gray200,
-  "accent_accentRed": globalColorToken.red600,
-  "accent_accentYellow": globalColorToken.yellow500,
-  "accent_accentGreen": globalColorToken.green600,
-  "accent_accentTeal": globalColorToken.teal600,
-  "accent_accentBlue": globalColorToken.blue600,
-  "accent_accentPurple": globalColorToken.purple600,
-  "accent_accentNavy": globalColorToken.blue850,
-  "icon_quaternary": globalColorToken.gray300,
-  "icon_secondary": globalColorToken.gray600,
-  "icon_tertiary": globalColorToken.gray400,
-  "icon_primary": globalColorToken.gray950,
-  "icon_accent": globalColorToken.blue600,
-  "icon_white": globalColorToken.white,
-  "alpha_dim": globalColorToken.alphaBlack40,
-  "alpha_whiteBg": globalColorToken.alphaWhite10
+const alias = {
+  "text_primary": globalColor.gray950,
+  "text_secondary": globalColor.gray700,
+  "text_tertiary": globalColor.gray500,
+  "text_quaternary": globalColor.gray400,
+  "text_accentBlue": globalColor.blue600,
+  "text_whitePrimary": globalColor.white,
+  "text_whiteSecondary": globalColor.alphaWhite70,
+  "text_warning": globalColor.red600,
+  "text_quinary": globalColor.gray300,
+  "text_success": globalColor.green600,
+  "line_primary": globalColor.gray200,
+  "line_secondary": globalColor.gray100,
+  "line_imgBorderBlack": globalColor.alphaBlack10,
+  "line_imgBorderWhite": globalColor.alphaWhite20,
+  "surface_primary": globalColor.white,
+  "surface_secondary": globalColor.gray50,
+  "surface_quaternary": globalColor.gray100,
+  "surface_tertiary": globalColor.gray75,
+  "surface_quinary": globalColor.gray200,
+  "accent_accentRed": globalColor.red600,
+  "accent_accentYellow": globalColor.yellow500,
+  "accent_accentGreen": globalColor.green600,
+  "accent_accentTeal": globalColor.teal600,
+  "accent_accentBlue": globalColor.blue600,
+  "accent_accentPurple": globalColor.purple600,
+  "accent_accentNavy": globalColor.blue850,
+  "icon_quaternary": globalColor.gray300,
+  "icon_secondary": globalColor.gray600,
+  "icon_tertiary": globalColor.gray400,
+  "icon_primary": globalColor.gray950,
+  "icon_accent": globalColor.blue600,
+  "icon_white": globalColor.white,
+  "alpha_dim": globalColor.alphaBlack40,
+  "alpha_whiteBg": globalColor.alphaWhite10
 } as const;
   
-const componentSpecificToken = {
-  "button_primary_default": globalColorToken.blue850,
-  "button_primary_pressed": globalColorToken.blue900,
-  "button_primary_disabled": globalColorToken.gray250,
-  "button_primary_text": aliasToken.text_whitePrimary,
-  "button_secondary_default": globalColorToken.blue50,
-  "button_secondary_pressed": globalColorToken.blue100,
-  "button_secondary_disabled": globalColorToken.gray50,
-  "button_secondary_text": aliasToken.accent_accentBlue,
-  "button_secondary_textDisabled": globalColorToken.gray300,
-  "button_tertiary_default": globalColorToken.gray75,
-  "button_tertiary_pressed": globalColorToken.gray100,
-  "button_tertiary_disabled": globalColorToken.gray50,
-  "button_tertiary_selectedLine": globalColorToken.alphaWhite50,
-  "button_tertiary_text": aliasToken.text_secondary,
-  "button_tertiary_textDisabled": aliasToken.text_quinary,
-  "button_tertiary_textSelected": aliasToken.text_whitePrimary,
-  "button_quaternary_default": aliasToken.surface_primary,
-  "button_quaternary_pressed": aliasToken.surface_secondary,
-  "button_quaternary_disabled": aliasToken.surface_secondary,
-  "button_quaternary_line": aliasToken.line_primary,
-  "button_quaternary_text": aliasToken.text_accentBlue,
-  "button_quaternary_textDisabled": aliasToken.text_quinary,
-  "tag_upload_normal": aliasToken.surface_primary,
-  "tag_upload_child": globalColorToken.blue50,
-  "tag_upload_selected": aliasToken.surface_primary,
-  "tag_upload_normalPressed": aliasToken.surface_secondary,
-  "tag_upload_selectedPressed": aliasToken.surface_secondary,
-  "tag_upload_childPressed": globalColorToken.blue100,
-  "tag_upload_normalLine": aliasToken.line_primary,
-  "tag_upload_normalText": aliasToken.text_secondary,
-  "tag_upload_selectedLine": aliasToken.accent_accentBlue,
-  "tag_upload_childText": aliasToken.accent_accentBlue,
-  "tag_upload_selectedText": aliasToken.text_accentBlue,
-  "tag_manual_normal": aliasToken.surface_primary,
-  "tag_manual_child": globalColorToken.blue50,
-  "tag_manual_normalLine": aliasToken.text_secondary,
-  "tag_manual_normalText": aliasToken.text_secondary,
-  "tag_manual_childText": aliasToken.text_accentBlue,
-  "tag_manual_childSelected": globalColorToken.blue100,
-  "tag_tagStory_normalSelectedText": aliasToken.accent_accentBlue,
-  "tag_tagStory_normal": aliasToken.surface_primary,
-  "tag_tagStory_milePrimary": aliasToken.surface_primary,
-  "tag_tagStory_normalSelected": aliasToken.surface_secondary,
-  "tag_tagStory_normalLine": globalColorToken.gray200,
-  "tag_tagStory_milePrimarySelected": aliasToken.surface_primary,
-  "tag_tagStory_milePrimaryLine": globalColorToken.gray700,
-  "tag_tagStory_milePrimaryText": aliasToken.text_secondary,
-  "tag_tagStory_mileSecondary": globalColorToken.gray700,
-  "tag_tagStory_mileSecondarySelected": globalColorToken.gray700,
-  "tag_tagStory_mileTertiary": globalColorToken.purple500,
-  "tag_tagStory_mileTertiarySelected": globalColorToken.purple600,
-  "tag_tagStory_mileSecondaryText": aliasToken.text_whitePrimary,
-  "tag_tagStory_mileTertiaryText": aliasToken.text_whitePrimary
+const componentSpecific = {
+  "button_primary_default": globalColor.blue850,
+  "button_primary_pressed": globalColor.blue900,
+  "button_primary_disabled": globalColor.gray250,
+  "button_primary_text": alias.text_whitePrimary,
+  "button_secondary_default": globalColor.blue50,
+  "button_secondary_pressed": globalColor.blue100,
+  "button_secondary_disabled": globalColor.gray50,
+  "button_secondary_text": alias.accent_accentBlue,
+  "button_secondary_textDisabled": globalColor.gray300,
+  "button_tertiary_default": globalColor.gray75,
+  "button_tertiary_pressed": globalColor.gray100,
+  "button_tertiary_disabled": globalColor.gray50,
+  "button_tertiary_selectedLine": globalColor.alphaWhite50,
+  "button_tertiary_text": alias.text_secondary,
+  "button_tertiary_textDisabled": alias.text_quinary,
+  "button_tertiary_textSelected": alias.text_whitePrimary,
+  "button_quaternary_default": alias.surface_primary,
+  "button_quaternary_pressed": alias.surface_secondary,
+  "button_quaternary_disabled": alias.surface_secondary,
+  "button_quaternary_line": alias.line_primary,
+  "button_quaternary_text": alias.text_accentBlue,
+  "button_quaternary_textDisabled": alias.text_quinary,
+  "tag_upload_normal": alias.surface_primary,
+  "tag_upload_child": globalColor.blue50,
+  "tag_upload_selected": alias.surface_primary,
+  "tag_upload_normalPressed": alias.surface_secondary,
+  "tag_upload_selectedPressed": alias.surface_secondary,
+  "tag_upload_childPressed": globalColor.blue100,
+  "tag_upload_normalLine": alias.line_primary,
+  "tag_upload_normalText": alias.text_secondary,
+  "tag_upload_selectedLine": alias.accent_accentBlue,
+  "tag_upload_childText": alias.accent_accentBlue,
+  "tag_upload_selectedText": alias.text_accentBlue,
+  "tag_manual_normal": alias.surface_primary,
+  "tag_manual_child": globalColor.blue50,
+  "tag_manual_normalLine": alias.text_secondary,
+  "tag_manual_normalText": alias.text_secondary,
+  "tag_manual_childText": alias.text_accentBlue,
+  "tag_manual_childSelected": globalColor.blue100,
+  "tag_tagStory_normalSelectedText": alias.accent_accentBlue,
+  "tag_tagStory_normal": alias.surface_primary,
+  "tag_tagStory_milePrimary": alias.surface_primary,
+  "tag_tagStory_normalSelected": alias.surface_secondary,
+  "tag_tagStory_normalLine": globalColor.gray200,
+  "tag_tagStory_milePrimarySelected": alias.surface_primary,
+  "tag_tagStory_milePrimaryLine": globalColor.gray700,
+  "tag_tagStory_milePrimaryText": alias.text_secondary,
+  "tag_tagStory_mileSecondary": globalColor.gray700,
+  "tag_tagStory_mileSecondarySelected": globalColor.gray700,
+  "tag_tagStory_mileTertiary": globalColor.purple500,
+  "tag_tagStory_mileTertiarySelected": globalColor.purple600,
+  "tag_tagStory_mileSecondaryText": alias.text_whitePrimary,
+  "tag_tagStory_mileTertiaryText": alias.text_whitePrimary
 } as const;
   

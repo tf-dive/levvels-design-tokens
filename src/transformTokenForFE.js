@@ -14,7 +14,7 @@ function flattenObject(obj, chainKey = ".") {
         if (typeof cur.value === "string" && /^\{.*?\}$/.test(cur.value)) {
           const keys = cur.value.replace(/\{|\}/g, "").split(".");
           const tokenName = keys.shift();
-          value = `__${dashToCamelCase(tokenName)}Token.${keys
+          value = `__${dashToCamelCase(tokenName)}.${keys
             .map(dashToCamelCase)
             .join("_")}__`;
         }

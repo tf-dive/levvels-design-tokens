@@ -35,7 +35,7 @@ fs.readFile(absolutePath, "utf8", (err, data) => {
 
   const tokenStrings = [];
   for (let tokenName in jsonData) {
-    const tokenVariableName = `${dashToCamelCase(tokenName)}Token`;
+    const tokenVariableName = dashToCamelCase(tokenName);
     const flattedTokenJson = flattenObject(jsonData[tokenName], "_");
 
     tokenStrings.push(
