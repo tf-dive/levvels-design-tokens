@@ -1,4 +1,4 @@
-const font = {
+export const font = {
   "captionSm": {
     "fontSize": 11,
     "textDecoration": "none",
@@ -221,8 +221,8 @@ const font = {
     "textCase": "none"
   }
 } as const;
-  
-const effect = {
+
+export const effect = {
   "shadowSmall_0": {
     "shadowType": "dropShadow",
     "radius": 2,
@@ -272,8 +272,8 @@ const effect = {
     "spread": -3
   }
 } as const;
-  
-const globalColor = {
+
+export const globalColor = {
   "gray950": "#030712ff",
   "gray900": "#111827ff",
   "gray800": "#1f2937ff",
@@ -371,8 +371,8 @@ const globalColor = {
   "yellow900": "#451a03ff",
   "blue850": "#243a84ff"
 } as const;
-  
-const size = {
+
+export const size = {
   "gap_xs": 4,
   "gap_xl": 12,
   "gap_small": 6,
@@ -405,8 +405,8 @@ const size = {
   "line_small": 0.5,
   "line_large": 1.5
 } as const;
-  
-const typography = {
+
+export const typography = {
   "captionSm_fontSize": 11,
   "captionSm_textDecoration": "none",
   "captionSm_fontFamily": "Lato",
@@ -595,101 +595,116 @@ const typography = {
   "italicTest_paragraphSpacing": 0,
   "italicTest_textCase": "none"
 } as const;
-  
-const alias = {
-  "text_primary": globalColor.gray950,
-  "text_secondary": globalColor.gray700,
-  "text_tertiary": globalColor.gray500,
-  "text_quaternary": globalColor.gray400,
-  "text_accentBlue": globalColor.blue600,
-  "text_whitePrimary": globalColor.white,
-  "text_whiteSecondary": globalColor.alphaWhite70,
-  "text_warning": globalColor.red600,
-  "text_quinary": globalColor.gray300,
-  "text_success": globalColor.green600,
-  "line_primary": globalColor.gray200,
-  "line_secondary": globalColor.gray100,
-  "line_imgBorderBlack": globalColor.alphaBlack10,
-  "line_imgBorderWhite": globalColor.alphaWhite20,
-  "surface_primary": globalColor.white,
-  "surface_secondary": globalColor.gray50,
-  "surface_quaternary": globalColor.gray100,
-  "surface_tertiary": globalColor.gray75,
-  "surface_quinary": globalColor.gray200,
-  "accent_accentRed": globalColor.red600,
-  "accent_accentYellow": globalColor.yellow500,
-  "accent_accentGreen": globalColor.green600,
-  "accent_accentTeal": globalColor.teal600,
-  "accent_accentBlue": globalColor.blue600,
-  "accent_accentPurple": globalColor.purple600,
-  "accent_accentNavy": globalColor.blue850,
-  "icon_quaternary": globalColor.gray300,
-  "icon_secondary": globalColor.gray600,
-  "icon_tertiary": globalColor.gray400,
-  "icon_primary": globalColor.gray950,
-  "icon_accent": globalColor.blue600,
-  "icon_white": globalColor.white,
-  "alpha_dim": globalColor.alphaBlack40,
-  "alpha_whiteBg": globalColor.alphaWhite10
-} as const;
-  
-const componentSpecific = {
-  "button_primary_default": globalColor.blue850,
-  "button_primary_pressed": globalColor.blue900,
-  "button_primary_disabled": globalColor.gray250,
-  "button_primary_text": alias.text_whitePrimary,
-  "button_secondary_default": globalColor.blue50,
-  "button_secondary_pressed": globalColor.blue100,
-  "button_secondary_disabled": globalColor.gray50,
-  "button_secondary_text": alias.accent_accentBlue,
-  "button_secondary_textDisabled": globalColor.gray300,
-  "button_tertiary_default": globalColor.gray75,
-  "button_tertiary_pressed": globalColor.gray100,
-  "button_tertiary_disabled": globalColor.gray50,
-  "button_tertiary_selectedLine": globalColor.alphaWhite50,
-  "button_tertiary_text": alias.text_secondary,
-  "button_tertiary_textDisabled": alias.text_quinary,
-  "button_tertiary_textSelected": alias.text_whitePrimary,
-  "button_quaternary_default": alias.surface_primary,
-  "button_quaternary_pressed": alias.surface_tertiary,
-  "button_quaternary_disabled": alias.surface_secondary,
-  "button_quaternary_line": alias.line_primary,
-  "button_quaternary_text": alias.text_accentBlue,
-  "button_quaternary_textDisabled": alias.text_quinary,
-  "tag_upload_normal": alias.surface_primary,
-  "tag_upload_child": globalColor.blue50,
-  "tag_upload_selected": alias.surface_primary,
-  "tag_upload_normalPressed": alias.surface_secondary,
-  "tag_upload_selectedPressed": globalColor.blue50,
-  "tag_upload_childPressed": globalColor.blue100,
-  "tag_upload_normalLine": alias.line_primary,
-  "tag_upload_normalText": alias.text_secondary,
-  "tag_upload_selectedLine": alias.accent_accentBlue,
-  "tag_upload_childText": alias.accent_accentBlue,
-  "tag_upload_selectedText": alias.text_accentBlue,
-  "tag_manual_normal": alias.surface_primary,
-  "tag_manual_child": globalColor.blue50,
-  "tag_manual_normalLine": alias.text_secondary,
-  "tag_manual_normalText": alias.text_secondary,
-  "tag_manual_childText": alias.text_accentBlue,
-  "tag_manual_normalPressed": alias.surface_tertiary,
-  "tag_manual_childPressed": globalColor.blue100,
-  "tag_tagStory_normal": alias.surface_primary,
-  "tag_tagStory_mileTertiary": alias.surface_primary,
-  "tag_tagStory_normalPressed": alias.surface_secondary,
-  "tag_tagStory_normalLine": globalColor.gray200,
-  "tag_tagStory_mileTertiaryPressed": alias.surface_tertiary,
-  "tag_tagStory_mileTertiaryLine": globalColor.gray700,
-  "tag_tagStory_mileTertiaryText": alias.text_secondary,
-  "tag_tagStory_mileSecondary": globalColor.gray700,
-  "tag_tagStory_mileSecondaryPressed": globalColor.gray800,
-  "tag_tagStory_milePrimary": globalColor.purple500,
-  "tag_tagStory_milePrimaryPressed": globalColor.purple600,
-  "tag_tagStory_mileSecondaryText": alias.text_whitePrimary,
-  "tag_tagStory_milePrimaryText": alias.text_whitePrimary,
-  "tag_tagStory_normalText": alias.text_accentBlue
-} as const;
-  
 
-    
-export { font, effect, globalColor, size, alias, componentSpecific, typography }
+export const text = {
+  "primary": globalColor.gray950,
+  "secondary": globalColor.gray700,
+  "tertiary": globalColor.gray500,
+  "quaternary": globalColor.gray400,
+  "accentBlue": globalColor.blue600,
+  "whitePrimary": globalColor.white,
+  "whiteSecondary": globalColor.alphaWhite70,
+  "warning": globalColor.red600,
+  "quinary": globalColor.gray300,
+  "success": globalColor.green600
+} as const;
+
+export const line = {
+  "primary": globalColor.gray200,
+  "secondary": globalColor.gray100,
+  "imgBorderBlack": globalColor.alphaBlack10,
+  "imgBorderWhite": globalColor.alphaWhite20
+} as const;
+
+export const surface = {
+  "primary": globalColor.white,
+  "secondary": globalColor.gray50,
+  "quaternary": globalColor.gray100,
+  "tertiary": globalColor.gray75,
+  "quinary": globalColor.gray200
+} as const;
+
+export const accent = {
+  "accentRed": globalColor.red600,
+  "accentYellow": globalColor.yellow500,
+  "accentGreen": globalColor.green600,
+  "accentTeal": globalColor.teal600,
+  "accentBlue": globalColor.blue600,
+  "accentPurple": globalColor.purple600,
+  "accentNavy": globalColor.blue850
+} as const;
+
+export const icon = {
+  "quaternary": globalColor.gray300,
+  "secondary": globalColor.gray600,
+  "tertiary": globalColor.gray400,
+  "primary": globalColor.gray950,
+  "accent": globalColor.blue600,
+  "white": globalColor.white
+} as const;
+
+export const alpha = {
+  "dim": globalColor.alphaBlack40,
+  "whiteBg": globalColor.alphaWhite10
+} as const;
+
+export const button = {
+  "primary_default": globalColor.blue850,
+  "primary_pressed": globalColor.blue900,
+  "primary_disabled": globalColor.gray250,
+  "primary_text": text.whitePrimary,
+  "secondary_default": globalColor.blue50,
+  "secondary_pressed": globalColor.blue100,
+  "secondary_disabled": globalColor.gray50,
+  "secondary_text": accent.accentBlue,
+  "secondary_textDisabled": globalColor.gray300,
+  "tertiary_default": globalColor.gray75,
+  "tertiary_pressed": globalColor.gray100,
+  "tertiary_disabled": globalColor.gray50,
+  "tertiary_selectedLine": globalColor.alphaWhite50,
+  "tertiary_text": text.secondary,
+  "tertiary_textDisabled": text.quinary,
+  "tertiary_textSelected": text.whitePrimary,
+  "quaternary_default": surface.primary,
+  "quaternary_pressed": surface.tertiary,
+  "quaternary_disabled": surface.secondary,
+  "quaternary_line": line.primary,
+  "quaternary_text": text.accentBlue,
+  "quaternary_textDisabled": text.quinary
+} as const;
+
+export const tag = {
+  "upload_normal": surface.primary,
+  "upload_child": globalColor.blue50,
+  "upload_selected": surface.primary,
+  "upload_normalPressed": surface.secondary,
+  "upload_selectedPressed": globalColor.blue50,
+  "upload_childPressed": globalColor.blue100,
+  "upload_normalLine": line.primary,
+  "upload_normalText": text.secondary,
+  "upload_selectedLine": accent.accentBlue,
+  "upload_childText": accent.accentBlue,
+  "upload_selectedText": text.accentBlue,
+  "manual_normal": surface.primary,
+  "manual_child": globalColor.blue50,
+  "manual_normalLine": text.secondary,
+  "manual_normalText": text.secondary,
+  "manual_childText": text.accentBlue,
+  "manual_normalPressed": surface.tertiary,
+  "manual_childPressed": globalColor.blue100,
+  "tagStory_normal": surface.primary,
+  "tagStory_mileTertiary": surface.primary,
+  "tagStory_normalPressed": surface.secondary,
+  "tagStory_normalLine": globalColor.gray200,
+  "tagStory_mileTertiaryPressed": surface.tertiary,
+  "tagStory_mileTertiaryLine": globalColor.gray700,
+  "tagStory_mileTertiaryText": text.secondary,
+  "tagStory_mileSecondary": globalColor.gray700,
+  "tagStory_mileSecondaryPressed": globalColor.gray800,
+  "tagStory_milePrimary": globalColor.purple500,
+  "tagStory_milePrimaryPressed": globalColor.purple600,
+  "tagStory_mileSecondaryText": text.whitePrimary,
+  "tagStory_milePrimaryText": text.whitePrimary,
+  "tagStory_normalText": text.accentBlue
+} as const;
+

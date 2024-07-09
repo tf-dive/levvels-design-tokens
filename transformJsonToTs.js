@@ -35,41 +35,61 @@ fs.readFile(absolutePath, "utf8", (err, data) => {
 
   const tokenStrings = [];
   const tokenVariableNames = [];
+  const aliasToken = {};
+
   for (let tokenName in jsonData) {
     const tokenVariableName = dashToCamelCase(tokenName);
     const flattedTokenJson = flattenObject(jsonData[tokenName], "_");
+    const jsonString = JSON.stringify(flattedTokenJson, null, 2);
 
-    tokenVariableNames.push(tokenVariableName);
-    tokenStrings.push(
-      `const ${tokenVariableName} = ${JSON.stringify(
-        flattedTokenJson,
-        null,
-        2
-      )} as const;
-  
+    if (/"__(.*?)__"/.test(jsonString)) {
+      aliasToken[tokenVariableName] = {};
+      for (let aliasTokenName in jsonData[tokenName]) {
+        const flattedAliasTokenJson = flattenObject(
+          jsonData[tokenName][aliasTokenName],
+          "_"
+        );
+        aliasToken[tokenVariableName][aliasTokenName] = flattedAliasTokenJson;
+      }
+    } else {
+      tokenVariableNames.push(tokenVariableName);
+      tokenStrings.push(
+        `export const ${tokenVariableName} = ${jsonString} as const;
+
 `
-    );
+      );
+    }
   }
 
-  tokenStrings.sort((a, b) => {
-    const regex = /"__(.*?)__"/;
+  const aliasTokenKeys = Object.keys(aliasToken);
+  const pattern = `"__(${aliasTokenKeys.join("|")})\.(.*?)__"`;
+  const regex = new RegExp(pattern, "g");
+  for (let aliasName in aliasToken) {
+    for (let aliasTokenName in aliasToken[aliasName]) {
+      const string = JSON.stringify(
+        aliasToken[aliasName][aliasTokenName],
+        null,
+        2
+      );
 
-    if (regex.test(a)) {
-      return 1;
-    } else if (regex.test(b)) {
-      return -1;
+      tokenVariableNames.push(aliasTokenName);
+      tokenStrings.push(
+        `export const ${aliasTokenName} = ${string.replace(
+          regex,
+          (match, p1, p2) => `"__${p2.replace("_", ".")}__"`
+        )} as const;
+
+`
+      );
     }
-    return 0;
-  });
+  }
 
   const filePath = path.join("./fe", outputFileName);
 
   // TypeScript 파일에 쓰기
   fs.writeFile(
     filePath,
-    `${tokenStrings.join("").replace(/"__(.*?)__"/g, "$1")}
-    
-export { ${tokenVariableNames.join(", ")} }`,
+    `${tokenStrings.join("").replace(/"__(.*?)__"/g, "$1")}`,
     (writeErr) => {
       if (writeErr) {
         console.error("Error writing TypeScript file:", writeErr);
