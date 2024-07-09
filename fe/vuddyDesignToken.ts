@@ -1,3 +1,5 @@
+const a = 1;
+
 export const font = {
   "displayBase": {
     "fontSize": 36,
@@ -311,16 +313,16 @@ export const globalColor = {
   "gray100": "#edeff2ff",
   "gray75": "#f3f4f6ff",
   "gray50": "#f9fafbff",
-  "blue900": "#172554ff",
-  "blue800": "#1e40afff",
-  "blue700": "#1d4ed8ff",
-  "blue600": "#2563ebff",
-  "blue500": "#3b82f6ff",
-  "blue400": "#60a5faff",
-  "blue300": "#93c5fdff",
-  "blue200": "#bfdbfeff",
-  "blue100": "#dbeafeff",
-  "blue50": "#eff6ffff",
+  "blue900": "#091b57ff",
+  "blue800": "#0f2d94ff",
+  "blue700": "#113bceff",
+  "blue600": "#234ee7ff",
+  "blue500": "#3c64f1ff",
+  "blue400": "#6686f9ff",
+  "blue300": "#8da6ffff",
+  "blue200": "#aabdfeff",
+  "blue100": "#d2dcffff",
+  "blue50": "#ebf0ffff",
   "red900": "#450a0aff",
   "red800": "#7f1d1dff",
   "red700": "#b91c1cff",
@@ -389,16 +391,16 @@ export const globalColor = {
   "white20": "#ffffff33",
   "white10": "#ffffff1a",
   "white5": "#ffffff0d",
-  "mint900": "#002b26ff",
-  "mint800": "#004d44ff",
-  "mint700": "#007668ff",
-  "mint600": "#009e8cff",
-  "mint500": "#00bfa8ff",
-  "mint400": "#0bead0ff",
-  "mint300": "#36ffe7ff",
-  "mint200": "#90fff2ff",
-  "mint100": "#cafff9ff",
-  "mint50": "#e4fffcff"
+  "yellowgreen900": "#374208ff",
+  "yellowgreen800": "#596b0bff",
+  "yellowgreen700": "#7a9600ff",
+  "yellowgreen600": "#92b400ff",
+  "yellowgreen500": "#acd400ff",
+  "yellowgreen400": "#bfec00ff",
+  "yellowgreen300": "#d0ff0cff",
+  "yellowgreen200": "#e4ff73ff",
+  "yellowgreen100": "#eeffa7ff",
+  "yellowgreen50": "#f5ffcbff"
 } as const;
 
 export const typography = {
@@ -574,15 +576,15 @@ export const text = {
   "secondary": globalColor.gray700,
   "tertiary": globalColor.gray500,
   "disabled": globalColor.gray300,
-  "accent": globalColor.blue600,
   "success": globalColor.green600,
   "danger": globalColor.red600,
-  "vuddyNegative": globalColor.mint400,
-  "vuddyPositive": globalColor.mint600,
+  "vuddyHighlight": globalColor.yellowgreen300,
+  "vuddyPrimary": globalColor.blue600,
   "whitePrimary": globalColor.white100,
   "whiteSecondary": globalColor.white70,
   "caution": globalColor.yellow600,
-  "whiteDisabled": globalColor.white30
+  "whiteDisabled": globalColor.white30,
+  "vuddySecondary": globalColor.blue300
 } as const;
 
 export const icon = {
@@ -590,39 +592,38 @@ export const icon = {
   "secondary": globalColor.gray700,
   "tertiary": globalColor.gray500,
   "disabled": globalColor.gray300,
-  "vuddyNegative": globalColor.mint400,
-  "vuddyPositive": globalColor.mint600,
+  "vuddyHighlight": globalColor.yellowgreen300,
+  "vuddyPrimary": globalColor.blue600,
   "whitePrimary": globalColor.white100,
   "whiteSecondary": globalColor.white70,
-  "accent": globalColor.blue600,
   "success": globalColor.green600,
   "danger": globalColor.red600,
   "caution": globalColor.yellow600,
-  "whiteDisabled": globalColor.white30
+  "whiteDisabled": globalColor.white30,
+  "vuddySecondary": globalColor.blue300
 } as const;
 
 export const line = {
   "dividerPrimary": globalColor.gray200,
   "dividerSecondary": globalColor.gray100,
-  "vuddyNegative": globalColor.mint400,
-  "vuddyPositive": globalColor.mint600,
+  "vuddyHighlight": globalColor.yellowgreen300,
+  "vuddyPrimary": globalColor.blue600,
   "whitePrimary": globalColor.white100,
   "whiteSecondary": globalColor.white70,
-  "accent": globalColor.blue600,
   "success": globalColor.green600,
   "danger": globalColor.red600,
   "imgOutline": globalColor.black5,
   "blackPrimary": globalColor.black100,
-  "blackSecondary": globalColor.black70,
+  "blackSecondary": globalColor.black50,
   "containerOutline": globalColor.gray200,
   "caution": globalColor.yellow600,
-  "whiteDisabled": globalColor.white30
+  "whiteDisabled": globalColor.white30,
+  "vuddySecondary": globalColor.blue300
 } as const;
 
 export const surface = {
-  "vuddyPrimary": globalColor.mint600,
-  "vuddySecondary": globalColor.mint400,
-  "accent": globalColor.blue600,
+  "vuddyPrimary": globalColor.blue600,
+  "vuddySecondary": globalColor.blue300,
   "success": globalColor.green600,
   "danger": globalColor.red600,
   "primary": globalColor.white100,
@@ -637,27 +638,27 @@ export const surface = {
   "whiteSecondary": globalColor.white50,
   "whiteTertiary": globalColor.white20,
   "dimLow": globalColor.black20,
-  "vuddyTertiary": globalColor.mint200,
-  "vuddyQuaternary": globalColor.mint100,
+  "vuddyTertiary": globalColor.blue100,
+  "vuddyQuaternary": globalColor.blue50,
   "caution": globalColor.yellow600,
-  "accentLowest": globalColor.blue50,
   "successLowest": globalColor.green50,
   "dangerLowest": globalColor.red50,
-  "cautionLowest": globalColor.yellow50
+  "cautionLowest": globalColor.yellow50,
+  "vuddyHighlight": globalColor.yellowgreen300
 } as const;
 
 export const button = {
-  "primary": globalColor.gray950,
-  "primaryPressed": globalColor.gray700,
-  "primaryDisabled": globalColor.gray75,
-  "secondary": globalColor.mint200,
-  "secondaryPressed": globalColor.mint400,
-  "secondaryDisabled": globalColor.mint50,
+  "primary": globalColor.blue600,
+  "primaryPressed": globalColor.blue800,
+  "primaryDisabled": globalColor.blue50,
+  "secondary": globalColor.blue100,
+  "secondaryPressed": globalColor.blue300,
+  "secondaryDisabled": globalColor.blue50,
   "white": globalColor.white100,
   "whitePressed": globalColor.white70,
   "whiteDisabled": globalColor.white30,
-  "primaryHover": globalColor.gray800,
-  "secondaryHover": globalColor.mint300,
+  "primaryHover": globalColor.blue700,
+  "secondaryHover": globalColor.blue200,
   "whiteHover": globalColor.white80,
   "tertiary": globalColor.gray100,
   "tertiaryHover": globalColor.gray200,

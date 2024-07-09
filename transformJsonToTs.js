@@ -87,7 +87,7 @@ fs.readFile(absolutePath, "utf8", (err, data) => {
   const filePath = path.join("./fe", outputFileName);
 
   // TypeScript 파일에 쓰기
-  fs.writeFileSync(
+  fs.writeFile(
     filePath,
     `const a = 1;
 
