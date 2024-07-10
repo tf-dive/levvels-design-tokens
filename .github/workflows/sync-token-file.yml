@@ -83,7 +83,7 @@ jobs:
         run: |
           BRANCH_NAME="feature/design-token-update-${{ env.TIMESTAMP }}"
 
-          cp -rvf levvels-design-tokens/${{ env.TRANSFORM_FILE }} ${{ env.TARGET_REPO }}/packages/vuddy-shared/src/
+          cp -rvf levvels-design-tokens/${{ env.TRANSFORM_FILE }} ${{ env.TARGET_REPO }}/shared/components/src/
           cd ${{ env.TARGET_REPO }}
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
