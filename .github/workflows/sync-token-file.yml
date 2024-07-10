@@ -68,7 +68,7 @@ jobs:
           rm -v ${TRANSFORM_FILE}
           ls fe
           echo "TRANSFORM_FILE=${TRANSFORM_FILE}" >> $GITHUB_ENV
-          echo "npm run transform:fe ${CHANGED_FILE}"
+          npm run transform:fe ${CHANGED_FILE}
           cd ..
 
       - name: Checkout target repository
