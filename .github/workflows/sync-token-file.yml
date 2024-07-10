@@ -63,10 +63,11 @@ jobs:
       - name: Transform Token Json To Typescript
         run: |
           cd levvels-design-tokens
-          if [[ ${TARGET_REPO} == *starc* ]]; then echo "TRANSFORM_FILE=fe/starcDesignToken.ts" >> $GITHUB_ENV; else echo "TRANSFORM_FILE=fe/vuddyDesignToken.ts" >> $GITHUB_ENV; fi
+          if [[ ${TARGET_REPO} == *starc* ]]; then echo "TRANSFORM_FILE=fe/starcDesignToken.ts"; else echo "TRANSFORM_FILE=fe/vuddyDesignToken.ts"; fi
           chmod -R +w fe
           echo "rm -v ${TRANSFORM_FILE}"
           ls fe
+          echo "TRANSFORM_FILE=${TRANSFORM_FILE}" >> $GITHUB_ENV
           echo "npm run transform:fe ${CHANGED_FILE}"
           cd ..
 
