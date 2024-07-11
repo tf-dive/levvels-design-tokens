@@ -4,6 +4,19 @@ function dashToCamelCase(str) {
   });
 }
 
+const convertToVanillaExtractValue = (key, value) => {
+  if (typeof value === "object") {
+    const newValue = {};
+    for (let k in value) {
+      newValue[k] = convertToVanillaExtractValue(k, value[k]);
+    }
+    return newValue;
+  } else if (typeof value === "number") {
+    return key.endsWith("fontWeight") ? `${value}` : `${value}px`;
+  }
+  return value;
+};
+
 function flattenObject(obj, chainKey = ".") {
   const result = {};
 
@@ -18,7 +31,7 @@ function flattenObject(obj, chainKey = ".") {
             .map(dashToCamelCase)
             .join("_")}__`;
         }
-        result[prop] = value;
+        result[prop] = convertToVanillaExtractValue(prop, value);
       } else {
         for (let p in cur) {
           const camelCaseProp = dashToCamelCase(p);

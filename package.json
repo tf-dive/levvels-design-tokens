@@ -20,10 +20,7 @@
   },
   "scripts": {
     "start": "npm run transform-tokens",
-    "transform-tokens": "node ./transformTokens.js",
     "test": "jest",
-    "transform:android": "node ./examples/android/build.js",
-    "transform:ios": "node ./examples/ios/build.js",
     "transform:fe": "node ./transformJsonToTs.js"
   },
   "type": "module",
