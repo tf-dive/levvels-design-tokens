@@ -49,4 +49,45 @@ function flattenObject(obj, chainKey = ".") {
   return result;
 }
 
-export { dashToCamelCase, flattenObject };
+function getShadowStyles(obj) {
+  const flattedJson = flattenObject(obj, "_");
+  const shadowEffect = {};
+  const others = {};
+
+  Object.keys(flattedJson).forEach((key) => {
+    if (flattedJson[key].hasOwnProperty("shadowType")) {
+      const [tokenKey, index] = key.split("_");
+      if (!shadowEffect[tokenKey]) {
+        shadowEffect[tokenKey] = [];
+      }
+      shadowEffect[tokenKey][
+        index
+      ] = `${flattedJson[key].offsetX} ${flattedJson[key].offsetY} ${flattedJson[key].radius} ${flattedJson[key].spread} ${flattedJson[key].color}`;
+    } else {
+      others[key] = flattedJson[key];
+    }
+  });
+
+  const shadow = {};
+  Object.keys(shadowEffect).map((shadowKey) => {
+    shadow[shadowKey] = shadowEffect[shadowKey].join(", ");
+  });
+
+  const result = [
+    `export const shadow = ${JSON.stringify(shadow, null, 2)} as const;
+
+`,
+  ];
+
+  if (Object.keys(others).length > 0) {
+    result.push(
+      `export const effect = ${JSON.stringify(others, null, 2)} as const;
+
+`
+    );
+  }
+
+  return result;
+}
+
+export { dashToCamelCase, flattenObject, getShadowStyles };
