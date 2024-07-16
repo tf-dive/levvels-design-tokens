@@ -5,6 +5,7 @@ on:
     workflows: [Transform]
     types:
       - completed
+    workflow_dispatch:
 
 jobs:
   sync-file:
