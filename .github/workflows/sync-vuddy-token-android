@@ -1,0 +1,86 @@
+name: Sync File to Android Another Repository
+
+on:
+  workflow_run:
+    workflows: [Transform]
+    types:
+      - completed
+
+jobs:
+  sync-file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set Current timestamp
+        id: timestamp
+        run: |
+          TIMESTAMP=$(TZ='Asia/Seoul' date +"%Y-%m-%d-%H%M")
+          echo "TIMESTAMP=${TIMESTAMP}" >> $GITHUB_ENV
+
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: levvels-design-tokens
+          ref: main
+          fetch-depth: 2
+
+      - name: Get previous commit SHA
+        id: previous_commit
+        run: |
+          cd levvels-design-tokens
+          echo "PREVIOUS_SHA=$(git rev-parse HEAD~1)" >> $GITHUB_ENV
+          cd ..
+
+      - name: Get changed file path
+        id: get_changed_file
+        run: |
+          cd levvels-design-tokens
+          git fetch origin ${{ env.PREVIOUS_SHA }}
+          echo "$(git --no-pager diff --name-only ${{ env.PREVIOUS_SHA }} ${{ github.sha }} | grep '.json')"
+          CHANGED_FILE=$(git --no-pager diff --name-only ${{ env.PREVIOUS_SHA }} ${{ github.sha }} | grep '.json')
+          echo "CHANGED_FILE=${CHANGED_FILE}" >> $GITHUB_ENV
+          echo "TARGET_REPO=vuddy-aos" >> $GITHUB_ENV
+          cd ..
+
+      - name: Checkout target repository
+        uses: actions/checkout@v4
+        with:
+          repository: tf-dive/${{ env.TARGET_REPO }}
+          token: ${{ secrets.TOKEN_ANDROID }}
+          path: ${{ env.TARGET_REPO }}
+          ref: develop
+
+      - name: Copy file to target repository
+        run: |
+          BRANCH_NAME="feature/design-token-update-${{ env.TIMESTAMP }}"
+
+          cp -rvf levvels-design-tokens/${{ env.CHANGED_FILE }} ${{ env.TARGET_REPO }}/
+          cd ${{ env.TARGET_REPO }}
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout -b $BRANCH_NAME
+          git add .
+          git commit -m "Sync file.txt from source repository"
+          git push origin $BRANCH_NAME
+
+          echo "${{ secrets.PATO }}" > token
+
+          gh auth login --with-token < token
+          gh pr create \
+            --body "" \
+            --title "🎨 update design token" \
+            --head "$BRANCH_NAME" \
+            --base "develop"
+
+      # - name: Create Pull Request
+      #   uses: peter-evans/create-pull-request@v5
+      #   with:
+      #     token: ${{ secrets.PAT }}
+      #     commit-message: Sync file.txt from source repository
+      #     committer: GitHub <noreply@github.com>
+      #     author: GitHub <noreply@github.com>
+      #     title: Sync token file from source repository
+      #     body: This PR syncs token file from source repository
+      #     labels: auto-merge
