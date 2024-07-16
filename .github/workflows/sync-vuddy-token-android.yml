@@ -42,7 +42,7 @@ jobs:
           echo "$(git --no-pager diff --name-only ${{ env.PREVIOUS_SHA }} ${{ github.sha }} | grep '.json')"
           CHANGED_FILE=$(git --no-pager diff --name-only ${{ env.PREVIOUS_SHA }} ${{ github.sha }} | grep '.json')
           echo "CHANGED_FILE=${CHANGED_FILE}" >> $GITHUB_ENV
-          if [[ ${CHANGED_FILE} == *starc* ]]; then echo "TARGET_REPO=Star_iOS" >> $GITHUB_ENV; else echo "TARGET_REPO=vuddy-aos" >> $GITHUB_ENV; fi
+          echo "TARGET_REPO=vuddy-aos" >> $GITHUB_ENV
           cd ..
 
       - name: Checkout target repository
@@ -65,23 +65,3 @@ jobs:
           git add .
           git commit -m "Sync file.txt from source repository"
           git push origin $BRANCH_NAME
-
-          echo "${{ secrets.PATO }}" > token
-
-          gh auth login --with-token < token
-          gh pr create \
-            --body "" \
-            --title "🎨 update design token" \
-            --head "$BRANCH_NAME" \
-            --base "develop"
-
-      # - name: Create Pull Request
-      #   uses: peter-evans/create-pull-request@v5
-      #   with:
-      #     token: ${{ secrets.PAT }}
-      #     commit-message: Sync file.txt from source repository
-      #     committer: GitHub <noreply@github.com>
-      #     author: GitHub <noreply@github.com>
-      #     title: Sync token file from source repository
-      #     body: This PR syncs token file from source repository
-      #     labels: auto-merge
