@@ -5,8 +5,7 @@ on:
     workflows: [Transform]
     types:
       - completed
-    workflow_dispatch:
-
+  workflow_dispatch:
 jobs:
   sync-file:
     runs-on: ubuntu-latest
