@@ -42,7 +42,7 @@ jobs:
           echo "$(git --no-pager diff --name-only ${{ env.PREVIOUS_SHA }} ${{ github.sha }} | grep '.json')"
           CHANGED_FILE=$(git --no-pager diff --name-only ${{ env.PREVIOUS_SHA }} ${{ github.sha }} | grep '.json')
           echo "CHANGED_FILE=${CHANGED_FILE}" >> $GITHUB_ENV
-          echo "TARGET_REPO=vuddy-aos" >> $GITHUB_ENV
+          if [[ ${CHANGED_FILE} == *starc* ]]; then echo "TARGET_REPO=Star_iOS" >> $GITHUB_ENV; else echo "TARGET_REPO=vuddy-aos" >> $GITHUB_ENV; fi
           cd ..
 
       - name: Checkout target repository
